@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin Blog | Apex 360</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1F3A;
+            --accent: #E8AA42;
+            --accent-dark: #D89A2F;
+            --secondary: #2D5F6D;
+            --text-dark: #1E293B;
+            --text-body: #475569;
+            --bg-light: #F8F9FA;
+            --border: #E5E7EB;
+            --success: #22C55E;
+            --danger: #EF4444;
+            --font-display: 'Sora', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-light);
+            color: var(--text-body);
+        }
+        
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .admin-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .admin-header h1 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #1F4A56;
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #DC2626;
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+        }
+        
+        .articles-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        tr:hover {
+            background: var(--bg-light);
+        }
+        
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-header h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-body);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-help {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-body);
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(232, 170, 66, 0.1);
+            color: var(--accent-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>📝 Panel de Administración - Blog</h1>
+            <div style="display: flex; gap: 1rem;">
+                <a href="blog.html" class="btn btn-secondary">← Ver Blog</a>
+                <button onclick="openModal()" class="btn btn-primary">+ Nuevo Artículo</button>
+            </div>
+        </div>
+
+        <div class="articles-table">
+            <table id="articlesTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Categoría</th>
+                        <th>Archivo</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="articlesTableBody">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for Create/Edit Article -->
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nuevo Artículo</h2>
+                <button onclick="closeModal()" class="close-modal">×</button>
+            </div>
+            
+            <form id="articleForm" onsubmit="saveArticle(event)">
+                <input type="hidden" id="articleId">
+                
+                <div class="form-group">
+                    <label>Título del Artículo *</label>
+                    <input type="text" id="articleTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Resumen *</label>
+                    <textarea id="articleSummary" required placeholder="Breve descripción del artículo (1-2 frases)"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Categoría *</label>
+                    <select id="articleCategory" required>
+                        <option value="">Seleccionar categoría</option>
+                        <option value="People Analytics">People Analytics</option>
+                        <option value="Transformación Digital">Transformación Digital</option>
+                        <option value="Compensaciones">Compensaciones</option>
+                        <option value="Legislación">Legislación</option>
+                        <option value="Cultura Organizacional">Cultura Organizacional</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Nombre del Archivo *</label>
+                    <input type="text" id="articleFilename" required placeholder="ejemplo-articulo.html">
+                    <div class="form-help">El archivo debe existir en la carpeta /blog/ (ej: automatizaciones-rrhh.html)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Fecha de Publicación *</label>
+                    <input type="date" id="articleDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>URL Imagen (opcional)</label>
+                    <input type="url" id="articleImage" placeholder="https://...">
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-success" style="flex: 1;">Guardar Artículo</button>
+                    <button type="button" onclick="closeModal()" class="btn" style="flex: 1; background: var(--border);">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let articles = [];
+        let editingId = null;
+
+        function loadArticles() {
+            const stored = localStorage.getItem('blogArticles');
+            if (stored) {
+                articles = JSON.parse(stored);
+            }
+            renderTable();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('articlesTableBody');
+            
+            if (articles.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No hay artículos. Crea el primero usando el botón "+ Nuevo Artículo"</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = articles.map(article => `
+                <tr>
+                    <td>${article.id}</td>
+                    <td><strong>${article.title}</strong></td>
+                    <td><span class="category-badge">${article.category}</span></td>
+                    <td><code>${article.filename}</code></td>
+                    <td>${formatDate(article.date)}</td>
+                    <td class="actions">
+                        <button onclick="editArticle(${article.id})" class="btn btn-secondary btn-small">Editar</button>
+                        <button onclick="deleteArticle(${article.id})" class="btn btn-danger btn-small">Eliminar</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openModal(id = null) {
+            editingId = id;
+            const modal = document.getElementById('articleModal');
+            const form = document.getElementById('articleForm');
+            
+            form.reset();
+            
+            if (id) {
+                const article = articles.find(a => a.id === id);
+                if (article) {
+                    document.getElementById('modalTitle').textContent = 'Editar Artículo';
+                    document.getElementById('articleId').value = article.id;
+                    document.getElementById('articleTitle').value = article.title;
+                    document.getElementById('articleSummary').value = article.summary;
+                    document.getElementById('articleCategory').value = article.category;
+                    document.getElementById('articleFilename').value = article.filename;
+                    document.getElementById('articleDate').value = article.date;
+                    document.getElementById('articleImage').value = article.image || '';
+                }
+            } else {
+                document.getElementById('modalTitle').textContent = 'Nuevo Artículo';
+                // Set today's date as default
+                document.getElementById('articleDate').value = new Date().toISOString().split('T')[0];
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('articleModal').classList.remove('active');
+        }
+
+        function saveArticle(e) {
+            e.preventDefault();
+            
+            const articleData = {
+                title: document.getElementById('articleTitle').value,
+                summary: document.getElementById('articleSummary').value,
+                category: document.getElementById('articleCategory').value,
+                filename: document.getElementById('articleFilename').value,
+                date: document.getElementById('articleDate').value,
+                image: document.getElementById('articleImage').value
+            };
+            
+            if (editingId) {
+                const index = articles.findIndex(a => a.id === editingId);
+                articles[index] = { ...articles[index], ...articleData };
+            } else {
+                const newId = articles.length > 0 ? Math.max(...articles.map(a => a.id)) + 1 : 1;
+                articles.push({ id: newId, ...articleData });
+            }
+            
+            localStorage.setItem('blogArticles', JSON.stringify(articles));
+            renderTable();
+            closeModal();
+            
+            alert(editingId ? 'Artículo actualizado exitosamente' : 'Artículo creado exitosamente');
+        }
+
+        function editArticle(id) {
+            openModal(id);
+        }
+
+        function deleteArticle(id) {
+            if (confirm('¿Estás seguro de eliminar este artículo?')) {
+                articles = articles.filter(a => a.id !== id);
+                localStorage.setItem('blogArticles', JSON.stringify(articles));
+                renderTable();
+                alert('Artículo eliminado exitosamente');
+            }
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+        }
+
+        loadArticles();
+    </script>
+</body>
+</html>

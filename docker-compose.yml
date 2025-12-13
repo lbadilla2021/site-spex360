@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  apex360-web:
+    build: .
+    container_name: apex360-landing
+    ports:
+      - "9500:80"
+    restart: unless-stopped
+    environment:
+      - TZ=America/Santiago
+    volumes:
+      # Carpeta cursos - PERSISTENTE (archivos generados por PHP)
+      - ./cursos:/var/www/html/cursos
+      # Carpeta blog - PERSISTENTE
+      - ./blog:/var/www/html/blog
+    networks:
+      - apex-network
+    labels:
+      - "traefik.enable=false"
+      - "com.apex360.description=Apex 360 Landing Page & OTEC"
+
+networks:
+  apex-network:
+    driver: bridge

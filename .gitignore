@@ -1,0 +1,25 @@
+# Docker
+.env
+docker-compose.override.yml
+
+# Node modules (si los usas)
+node_modules/
+npm-debug.log
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Backups
+*.backup
+*.bak
+
+# Logs
+*.log
+logs/
+
+# Archivos temporales
+*.tmp
+.cache/

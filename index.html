@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Optimizado 2025 -->
+    <title>Consultoría RRHH & People Analytics en Chile | Apex 360</title>
+    <meta name="description" content="Consultoría estratégica de RRHH, People Analytics y capacitación SENCE en Chile. Optimizamos tu gestión de personas con datos, tecnología y expertise especializado.">
+    <meta name="keywords" content="consultoría recursos humanos Chile, people analytics, OTEC SENCE, compensaciones, remuneraciones, outsourcing RRHH, business intelligence RRHH">
+    <meta name="author" content="Luciano Badilla - Apex 360">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://apex360.cl/">
+    <meta property="og:title" content="Consultoría RRHH & People Analytics | Apex 360">
+    <meta property="og:description" content="Consultoría estratégica de RRHH, People Analytics y capacitación SENCE para empresas chilenas.">
+    <meta property="og:locale" content="es_CL">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://apex360.cl/">
+    
+    <!-- Fonts - Distinctive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Paleta "Deep Trust" - Navy profundo + Golden Amber */
+            --primary: #1A1F3A;        /* Navy profundo - casi negro azulado */
+            --primary-light: #2A3654;  /* Navy medium */
+            --accent: #E8AA42;         /* Golden amber - dorado cálido */
+            --accent-dark: #D89A2F;    /* Amber oscuro */
+            --accent-light: #F4C470;   /* Amber claro */
+            --secondary: #2D5F6D;      /* Teal profundo */
+            --text-dark: #1E293B;      /* Slate oscuro */
+            --text-body: #475569;      /* Slate medium */
+            --text-light: #64748B;     /* Slate light */
+            --bg-light: #F8F9FA;       /* Off-white frío */
+            --bg-white: #FFFFFF;
+            --border: #E5E7EB;         /* Gris claro */
+            
+            /* Typography */
+            --font-display: 'Sora', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            
+            /* Spacing */
+            --section-padding: clamp(4rem, 8vw, 8rem);
+            --container-padding: clamp(1.5rem, 5vw, 2rem);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--text-body);
+            line-height: 1.7;
+            background: var(--bg-white);
+            overflow-x: hidden;
+        }
+        
+        /* Container System */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+        
+        .container-narrow {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+        
+        /* Header/Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem var(--container-padding);
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-menu li a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-menu li a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid var(--accent);
+        }
+        
+        .cta-button:hover {
+            background: var(--accent-dark);
+            border-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(232, 170, 66, 0.35);
+        }
+        
+        .cta-button-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .cta-button-outline:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 8px 20px rgba(10, 37, 64, 0.15);
+        }
+        
+        /* Hero Section - Impactante y moderno */
+        .hero {
+            margin-top: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, #0F1729 100%);
+            color: white;
+            padding: 5.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 50%, rgba(232, 170, 66, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-content h1 .highlight {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-content .subtitle {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.75rem;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.75rem;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+        
+        .hero-visual {
+            position: relative;
+            animation: fadeInRight 1s ease-out 0.5s both;
+        }
+        
+        .visual-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .visual-card h3 {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .visual-card p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+        }
+        
+        /* Problem-Solution Section */
+        .problem-section {
+            padding: var(--section-padding) 0;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(45, 95, 109, 0.1);
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 50px;
+            margin-bottom: 1.25rem;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            max-width: 720px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .problem-card {
+            padding: 1.75rem 2rem;
+            background: var(--bg-light);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            border-color: var(--accent);
+        }
+        
+        .problem-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 2px solid var(--border);
+        }
+        
+        .problem-content {
+            flex: 1;
+        }
+        
+        .problem-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .problem-card p {
+            color: var(--text-body);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 1024px) {
+            .problem-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .problem-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+        
+        /* Services Section */
+        .services-section {
+            padding: var(--section-padding) 0;
+            background: var(--bg-light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.75rem;
+            border: 2px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 16px rgba(232, 170, 66, 0.3);
+        }
+        
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin: 0;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .service-card p {
+            color: var(--text-body);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-bottom: 0;
+        }
+        
+        .service-features li {
+            padding: 0.35rem 0;
+            padding-left: 1.75rem;
+            position: relative;
+            color: var(--text-body);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        /* Process Section */
+        .process-section {
+            padding: var(--section-padding) 0;
+            background: white;
+        }
+        
+        .process-timeline {
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+        
+        .process-step {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 39px;
+            top: 80px;
+            width: 2px;
+            height: calc(100% + 3rem);
+            background: linear-gradient(180deg, var(--accent) 0%, rgba(232, 170, 66, 0.2) 100%);
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, #2A3654 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 8px 20px rgba(26, 31, 58, 0.25);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-content h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .step-content p {
+            color: var(--text-body);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: var(--section-padding) 0;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .cta-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .cta-content p {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button-primary {
+            padding: 1.125rem 2.5rem;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+        
+        .cta-button-primary:hover {
+            background: #0F1729;
+            border-color: #0F1729;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(26, 31, 58, 0.3);
+        }
+        
+        .cta-button-secondary {
+            padding: 1.125rem 2.5rem;
+            background: transparent;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+        }
+        
+        .cta-button-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-brand h3 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-brand h3 span {
+            color: var(--accent);
+        }
+        
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .footer-column h4 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+            
+            .nav-menu li a {
+                font-size: 1.1rem;
+            }
+            
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-visual {
+                order: -1;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-cta {
+                flex-direction: column;
+            }
+            
+            .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .services-grid,
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-step {
+                grid-template-columns: 60px 1fr;
+                gap: 1.5rem;
+            }
+            
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .process-step:not(:last-child)::after {
+                left: 29px;
+                top: 60px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="#" class="logo">Apex<span>360</span></a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="otec.html">OTEC</a></li>
+                <li><a href="#metodologia">Metodología</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <a href="#contacto" class="cta-button" style="display: none;" id="desktopCta">Conversemos →</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>
+                        Transformamos tu<br><span class="highlight">Gestión de Personas</span><br>con Datos y Estrategia
+                    </h1>
+                    <p class="subtitle">
+                        Consultoría especializada en RRHH, People Analytics y capacitación SENCE que optimiza tu talento, reduce costos operativos y potencia el desempeño organizacional.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#servicios" class="cta-button">Conoce nuestros servicios</a>
+                        <a href="#contacto" class="cta-button cta-button-outline">Conversemos</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="visual-card">
+                        <h3>📊 People Analytics</h3>
+                        <p>Decisiones estratégicas basadas en datos reales de tu organización</p>
+                    </div>
+                    <div class="visual-card">
+                        <h3>⚙️ Optimización Procesos</h3>
+                        <p>Reducción de costos operativos hasta 35% en remuneraciones y compensaciones</p>
+                    </div>
+                    <div class="visual-card">
+                        <h3>🎯 Cumplimiento Normativo</h3>
+                        <p>Asesoría especializada en legislación laboral chilena y SENCE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Desafíos Comunes</span>
+                <h2 class="section-title">¿Enfrentas estos problemas en tu organización?</h2>
+                <p class="section-subtitle">
+                    Muchas empresas chilenas pierden competitividad por procesos de RRHH ineficientes, falta de datos estratégicos y alto costo operativo.
+                </p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <div class="problem-content">
+                        <h3>Costos Elevados</h3>
+                        <p>Procesos de remuneraciones y compensaciones que consumen recursos excesivos sin análisis de optimización ni benchmarking de mercado.</p>
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">📉</div>
+                    <div class="problem-content">
+                        <h3>Decisiones sin Datos</h3>
+                        <p>Gestión de personas basada en intuición sin métricas, KPIs o análisis predictivo que sustente decisiones estratégicas.</p>
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⚠️</div>
+                    <div class="problem-content">
+                        <h3>Riesgos Normativos</h3>
+                        <p>Incumplimientos en legislación laboral chilena, Ley Karin, normativas SENCE y procedimientos de seguridad industrial.</p>
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🔄</div>
+                    <div class="problem-content">
+                        <h3>Alta Rotación</h3>
+                        <p>Falta de estrategias de retención, compensaciones no competitivas y ausencia de planes de desarrollo de talento.</p>
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⏱️</div>
+                    <div class="problem-content">
+                        <h3>Procesos Ineficientes</h3>
+                        <p>Administración laboral manual, duplicación de tareas y falta de automatización en procesos críticos de RRHH.</p>
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">📋</div>
+                    <div class="problem-content">
+                        <h3>Capacitación Improductiva</h3>
+                        <p>Programas de formación sin franquicia SENCE, sin medición de impacto ni alineación con objetivos de negocio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="servicios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nuestros Servicios</span>
+                <h2 class="section-title">Soluciones Integrales para tu Gestión de Personas</h2>
+                <p class="section-subtitle">
+                    Transformamos desafíos en oportunidades con consultoría estratégica, tecnología y expertise especializado en el mercado chileno.
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">📊</div>
+                        <h3>People Analytics & Business Intelligence</h3>
+                    </div>
+                    <p>Convertimos tus datos de RRHH en insights accionables con dashboards en Power BI y Looker Studio.</p>
+                    <ul class="service-features">
+                        <li>Análisis descriptivo y predictivo de talento</li>
+                        <li>KPIs estratégicos y tableros ejecutivos</li>
+                        <li>Modelos de rotación y retención</li>
+                        <li>Benchmarking salarial de mercado</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">💰</div>
+                        <h3>Compensaciones & Remuneraciones</h3>
+                    </div>
+                    <p>Optimizamos tu estructura salarial para ser competitivo, justo y rentable.</p>
+                    <ul class="service-features">
+                        <li>Diseño de bandas salariales</li>
+                        <li>Estudios de equidad interna</li>
+                        <li>Benchmarking competitivo</li>
+                        <li>Outsourcing de remuneraciones</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🎓</div>
+                        <h3>Capacitación OTEC SENCE</h3>
+                    </div>
+                    <p>Programas de formación certificados que desarrollan competencias críticas con franquicia tributaria.</p>
+                    <ul class="service-features">
+                        <li>Cursos Ley Karin y seguridad laboral</li>
+                        <li>Formación en herramientas digitales</li>
+                        <li>Desarrollo de liderazgo</li>
+                        <li>Capacitación técnica industrial</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">⚙️</div>
+                        <h3>Outsourcing RRHH</h3>
+                    </div>
+                    <p>Gestión integral de procesos administrativos laborales con eficiencia operativa garantizada.</p>
+                    <ul class="service-features">
+                        <li>Administración de remuneraciones</li>
+                        <li>Gestión documental laboral</li>
+                        <li>Cumplimiento normativo DT</li>
+                        <li>Soporte en relaciones laborales</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🎯</div>
+                        <h3>Consultoría Estratégica</h3>
+                    </div>
+                    <p>Análisis organizacional profundo y diseño de soluciones a medida para tus desafíos de talento.</p>
+                    <ul class="service-features">
+                        <li>Análisis y diseño de puestos</li>
+                        <li>Optimización de procesos RRHH</li>
+                        <li>Auditorías de gestión de personas</li>
+                        <li>Proyectos de transformación digital</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">📈</div>
+                        <h3>Control de Gestión RRHH</h3>
+                    </div>
+                    <p>Sistemas de medición y mejora continua del desempeño organizacional basados en datos.</p>
+                    <ul class="service-features">
+                        <li>Diseño de KPIs estratégicos</li>
+                        <li>Cuadros de mando integrales</li>
+                        <li>Evaluación de desempeño</li>
+                        <li>ROI de iniciativas de talento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section" id="metodologia">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Metodología</span>
+                <h2 class="section-title">Cómo Trabajamos Contigo</h2>
+                <p class="section-subtitle">
+                    Proceso estructurado y probado que garantiza resultados medibles en cada proyecto de consultoría.
+                </p>
+            </div>
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Diagnóstico Profundo</h3>
+                        <p>Análisis exhaustivo de tus procesos, modelos de RRHH y desafíos organizacionales. Identificamos brechas, oportunidades y definimos objetivos medibles con tu equipo directivo.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Diseño de Solución</h3>
+                        <p>Desarrollamos estrategias personalizadas y proyectos específicos basados en mejores prácticas, benchmarking de mercado y análisis de datos de tu organización.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Implementación Colaborativa</h3>
+                        <p>Ejecutamos las soluciones trabajando codo a codo con tu equipo, asegurando transferencia de conocimiento, adopción real y cambio sostenible en la organización.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Medición y Mejora Continua</h3>
+                        <p>Establecemos KPIs, medimos resultados y optimizamos continuamente. Garantizamos que cada proyecto entregue valor tangible y ROI demostrable para tu negocio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contacto">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿Listo para Transformar tu Gestión de Personas?</h2>
+                <p>
+                    Agenda una consultoría estratégica sin costo. Analizaremos tus desafíos y diseñaremos una solución a medida para tu organización.
+                </p>
+                <div class="cta-buttons">
+                    <a href="/cdn-cgi/l/email-protection#d2b1bdbca6b3b1a6bd92b3a2b7aae1e4e2fcb1be" class="cta-button-primary">Solicitar Consultoría Gratuita</a>
+                    <a href="https://wa.me/56978791638" class="cta-button-secondary">WhatsApp: +569 7879 1638</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Apex<span>360</span></h3>
+                    <p>
+                        Consultoría especializada en Recursos Humanos, People Analytics y capacitación OTEC SENCE. 
+                        Transformamos organizaciones a través de datos, estrategia y expertise en gestión de personas.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.linkedin.com/in/lucianobadilla/" class="social-link" target="_blank" aria-label="LinkedIn">in</a>
+                        <a href="/cdn-cgi/l/email-protection#31525e5f455052455e71504154490207011f525d" class="social-link" aria-label="Email">@</a>
+                        <a href="https://wa.me/56978791638" class="social-link" aria-label="WhatsApp">W</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">People Analytics</a></li>
+                        <li><a href="#servicios">Compensaciones</a></li>
+                        <li><a href="#servicios">Capacitación SENCE</a></li>
+                        <li><a href="#servicios">Outsourcing RRHH</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="https://apex360.cl/blog-rrhh/">Blog RRHH</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="/cdn-cgi/l/email-protection#fe9d91908a9f9d8a91be9f8e9b86cdc8ced09d92"><span class="__cf_email__" data-cfemail="690a06071d080a1d062908190c115a5f59470a05">[email&#160;protected]</span></a></li>
+                        <li><a href="tel:+56978791638">+569 7879 1638</a></li>
+                        <li>Los Ángeles, Región del Biobío</li>
+                        <li>Chile</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Apex 360. Todos los derechos reservados.</p>
+                <p>Consultoría de Recursos Humanos | OTEC Apex Capacitaciones</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Show/hide desktop CTA based on screen size
+        function handleDesktopCta() {
+            const desktopCta = document.getElementById('desktopCta');
+            const navMenu = document.getElementById('navMenu');
+    
