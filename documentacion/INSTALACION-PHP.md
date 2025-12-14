@@ -2,11 +2,12 @@
 
 ## 📋 **Archivos Actualizados para PHP**
 
-He actualizado 3 archivos para que funcione PHP:
+He actualizado 4 archivos para que funcione PHP:
 
 1. ✅ **Dockerfile** - Usa imagen `richarvey/nginx-php-fpm:latest`
 2. ✅ **nginx-php.conf** - Configuración Nginx con soporte PHP
-3. ✅ **generate-course.php** - Script PHP generador
+3. ✅ **generate-course.php** - Script PHP generador de cursos
+4. ✅ **generate-blog.php** - Script PHP generador de artículos
 
 ---
 
@@ -19,7 +20,9 @@ He actualizado 3 archivos para que funcione PHP:
 scp Dockerfile root@65.108.150.100:/root/docker/site-apex/
 scp nginx-php.conf root@65.108.150.100:/root/docker/site-apex/
 scp generate-course.php root@65.108.150.100:/root/docker/site-apex/
+scp generate-blog.php root@65.108.150.100:/root/docker/site-apex/
 scp admin/otec-admin.html root@65.108.150.100:/root/docker/site-apex/
+scp admin/blog-admin.html root@65.108.150.100:/root/docker/site-apex/
 ```
 
 ### **Paso 2: Conectar al VPS**
@@ -87,6 +90,7 @@ docker exec apex360-landing ls -la /var/www/html/ | grep php
 
 # Debería mostrar:
 # -rw-r--r-- generate-course.php
+# -rw-r--r-- generate-blog.php
 ```
 
 ### **Test 2: Verificar Permisos de Carpeta cursos**

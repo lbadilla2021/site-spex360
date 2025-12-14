@@ -94,7 +94,7 @@ async function saveArticle(e) {
     };
 
     try {
-        const response = await fetch('/generate-course.php', {
+        const response = await fetch('/generate-blog.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -128,7 +128,7 @@ async function deleteArticle(id) {
     }
 
     try {
-        const response = await fetch('/generate-course.php', {
+        const response = await fetch('/generate-blog.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: 'delete_blog', id })
