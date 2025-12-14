@@ -42,7 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     switch ($action) {
         case 'create':
+        case 'create_course':
         case 'update':
+        case 'update_course':
             if (!$course) {
                 http_response_code(400);
                 echo json_encode(['error' => 'Datos de curso no proporcionados']);
@@ -77,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
 
         case 'delete':
+        case 'delete_course':
             $courseId = $course['id'] ?? $input['id'] ?? null;
             if (!$courseId) {
                 http_response_code(400);
