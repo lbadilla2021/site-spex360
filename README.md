@@ -95,7 +95,7 @@ docker exec apex360-landing ls -la /usr/share/nginx/html/
 
 ### 📧 Configurar envío de correos
 
-El contenedor **no** incluye un servidor de correo local; si no configuras SMTP intentará usar `sendmail` del sistema y solo fallará si tampoco está disponible. Para asegurar la entrega, define un servidor SMTP externo mediante variables de entorno (en `.env` o exportadas antes de ejecutar `docker-compose`).
+El contenedor **no** incluye un servidor de correo local y el formulario de contacto exige SMTP externo. Si `SMTP_HOST` no está definido la API de contacto responderá con error y no intentará usar sendmail local. Configura las variables de entorno (en `.env` o exportadas antes de ejecutar `docker-compose`) para habilitar el envío.
 
 Variables disponibles:
 
@@ -151,7 +151,7 @@ docker-compose up -d
 
 Ahora puedes editar archivos y verás cambios inmediatos.
 
----
+---https://github.com/lbadilla2021/site-spex360/pull/16/conflict?name=send-contact.php&ancestor_oid=8ac177fdc7b6f5e6972b5c55841f90e720bc223b&base_oid=9208a9996564712f4ae153be3f6cf52d5ee946d2&head_oid=8645cb46879e0affe796376d8ae7d87d22794c35
 
 ### 🌐 Configurar Dominio
 

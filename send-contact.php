@@ -159,6 +159,10 @@ $smtpPass = getenv('SMTP_PASS') ?: null;
 $smtpSecure = strtolower(getenv('SMTP_SECURE') ?: 'tls');
 $smtpFrom = getenv('SMTP_FROM') ?: 'contacto@apex360.cl';
 
+if ($smtpHost === '') {
+    $respond(false, 'El envío de correos no está configurado. Define SMTP_HOST en las variables de entorno.', 500);
+}
+
 if (!in_array($smtpSecure, ['tls', 'ssl', 'none'], true)) {
     $respond(false, 'Configuración SMTP inválida: usa tls, ssl o none para SMTP_SECURE.', 400);
 }
