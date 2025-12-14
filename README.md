@@ -95,7 +95,7 @@ docker exec apex360-landing ls -la /usr/share/nginx/html/
 
 ### 📧 Configurar envío de correos
 
-El contenedor no incluye un servidor de correo local. Para que el formulario de contacto funcione debes apuntar a un servidor SMTP externo mediante variables de entorno (en `.env` o exportadas antes de ejecutar `docker-compose`).
+El contenedor **no** incluye un servidor de correo local; sin SMTP solo funcionará si `/usr/sbin/sendmail` está presente. El script ahora carga automáticamente un archivo `.env` ubicado junto a `send-contact.php`, por lo que puedes definir ahí tus credenciales antes de construir o levantar el contenedor.
 
 Variables disponibles:
 

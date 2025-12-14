@@ -23,6 +23,43 @@ $sanitize = static function (string $value): string {
     return trim(preg_replace("/(\r|\n)/", '', $value));
 };
 
+/**
+ * Carga variables desde un archivo .env simple, ignorando líneas vacías y comentarios.
+ */
+$loadDotEnv = static function (string $path): void {
+    if (!is_readable($path)) {
+        return;
+    }
+
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $trimmed = ltrim($line);
+        if ($trimmed === '' || $trimmed[0] === '#') {
+            continue;
+        }
+
+        [$key, $value] = array_pad(explode('=', $line, 2), 2, '');
+        $key = trim($key);
+        $value = trim($value);
+
+        if ($key === '') {
+            continue;
+        }
+
+        $hasDoubleQuotes = isset($value[0], $value[strlen($value) - 1]) && $value[0] === '"' && substr($value, -1) === '"';
+        $hasSingleQuotes = isset($value[0], $value[strlen($value) - 1]) && $value[0] === "'" && substr($value, -1) === "'";
+        if ($hasDoubleQuotes || $hasSingleQuotes) {
+            $value = substr($value, 1, -1);
+        }
+
+        if (getenv($key) === false || getenv($key) === '') {
+            putenv($key . '=' . $value);
+        }
+    }
+};
+
+$loadDotEnv(__DIR__ . '/.env');
+
 $name = $sanitize($_POST['name'] ?? '');
 $email = $sanitize($_POST['email'] ?? '');
 $comments = trim($_POST['comments'] ?? '');
@@ -41,6 +78,7 @@ $body = "Nombre: {$name}\nCorreo: {$email}\nComentarios:\n{$comments}\n";
 $headers = "From: contacto@apex360.cl\r\n";
 $headers .= "Reply-To: {$email}\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+$headers .= "Content-Transfer-Encoding: 8bit\r\n";
 
 class SimpleSmtpMailer
 {
@@ -100,7 +138,7 @@ class SimpleSmtpMailer
             ];
         }
 
-        $connection = stream_socket_client(
+        $connection = @stream_socket_client(
             $transport . $this->host . ':' . $this->port,
             $errno,
             $errstr,
@@ -115,15 +153,17 @@ class SimpleSmtpMailer
 
         stream_set_timeout($connection, $this->timeout);
 
+        $hostname = gethostname() ?: 'localhost';
+
         $this->sendCommand($connection, '', '220');
-        $this->sendCommand($connection, 'EHLO apex360.local', '250');
+        $this->sendCommand($connection, 'EHLO ' . $hostname, '250');
 
         if ($this->encryption === 'tls') {
             $this->sendCommand($connection, 'STARTTLS', '220');
             if (!stream_socket_enable_crypto($connection, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
                 throw new RuntimeException('No se pudo negociar TLS con el servidor SMTP');
             }
-            $this->sendCommand($connection, 'EHLO apex360.local', '250');
+            $this->sendCommand($connection, 'EHLO ' . $hostname, '250');
         }
 
         if ($this->username && $this->password) {
@@ -136,7 +176,11 @@ class SimpleSmtpMailer
         $this->sendCommand($connection, 'RCPT TO: <' . $to . '>', '250');
         $this->sendCommand($connection, 'DATA', '354');
 
-        $message = $headers . "\r\n" . $body . "\r\n.";
+        $message = '';
+        $message .= $headers;
+        $message .= 'To: ' . $to . "\r\n";
+        $message .= 'Subject: ' . $subject . "\r\n";
+        $message .= "\r\n" . $body . "\r\n.";
         $this->sendCommand($connection, $message, '250');
         $this->sendCommand($connection, 'QUIT', '221');
         fclose($connection);
@@ -149,18 +193,27 @@ $smtpHost = getenv('SMTP_HOST') ?: '';
 $smtpPort = (int) (getenv('SMTP_PORT') ?: 587);
 $smtpUser = getenv('SMTP_USER') ?: null;
 $smtpPass = getenv('SMTP_PASS') ?: null;
-$smtpSecure = getenv('SMTP_SECURE') ?: 'tls';
+$smtpSecure = strtolower(getenv('SMTP_SECURE') ?: 'tls');
 $smtpFrom = getenv('SMTP_FROM') ?: 'contacto@apex360.cl';
+
+$sendmailPath = ini_get('sendmail_path');
+$sendmailAvailable = is_executable('/usr/sbin/sendmail') || ($sendmailPath && is_executable(strtok($sendmailPath, ' ')));
+
+if (!in_array($smtpSecure, ['tls', 'ssl', 'none'], true)) {
+    $respond(false, 'Configuración SMTP inválida: usa tls, ssl o none para SMTP_SECURE.', 400);
+}
 
 try {
     if ($smtpHost !== '') {
         $mailer = new SimpleSmtpMailer($smtpHost, $smtpPort, $smtpSecure, $smtpUser, $smtpPass);
         $mailer->send($smtpFrom, $to, $subject, $body, $headers);
-    } else {
+    } elseif ($sendmailAvailable) {
         $mailSent = mail($to, $subject, $body, $headers, '-fcontacto@apex360.cl');
         if (!$mailSent) {
             throw new RuntimeException('No se pudo enviar el correo usando sendmail local. Configura SMTP_HOST para usar un servidor externo.');
         }
+    } else {
+        $respond(false, 'El envío de correos no está configurado. Define SMTP_HOST en las variables de entorno.', 500);
     }
 } catch (Throwable $exception) {
     error_log('Contacto Apex 360: fallo el envío de correo - ' . $exception->getMessage());
