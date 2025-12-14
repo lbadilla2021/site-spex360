@@ -16,10 +16,14 @@ services:
       - SMTP_SECURE=${SMTP_SECURE:-tls}
       - SMTP_FROM=${SMTP_FROM:-contacto@apex360.cl}
     volumes:
-      # Carpeta cursos - PERSISTENTE (archivos generados por PHP)
       - ./cursos:/var/www/html/cursos
-      # Carpeta blog - PERSISTENTE
       - ./blog:/var/www/html/blog
+      - ./assets:/var/www/html/assets
+      - ./index.html:/var/www/html/index.html
+      - ./otec.html:/var/www/html/otec.html
+      - ./otec-admin.html:/var/www/html/otec-admin.html
+      - ./blog.html:/var/www/html/blog.html
+      - ./blog-admin.html:/var/www/html/blog-admin.html
     networks:
       - nocobase-network
     labels:
