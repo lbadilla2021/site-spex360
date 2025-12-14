@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Detalle del Curso | OTEC Apex</title>
+    <title>Titulo 6 | OTEC Apex</title>
+    <meta name="description" content="szcmnsx,zcmnxz">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -22,7 +23,6 @@
             --bg-light: #F8F9FA;
             --bg-white: #FFFFFF;
             --border: #E5E7EB;
-            
             --font-display: 'Sora', sans-serif;
             --font-body: 'DM Sans', sans-serif;
         }
@@ -46,7 +46,6 @@
             padding: 0 clamp(1.5rem, 5vw, 2rem);
         }
         
-        /* Header */
         header {
             position: fixed;
             top: 0;
@@ -110,7 +109,6 @@
             transform: translateY(-2px);
         }
         
-        /* Course Detail */
         .course-detail {
             margin-top: 80px;
             padding: 4rem 0;
@@ -239,7 +237,6 @@
             margin-bottom: 0.75rem;
         }
         
-        /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             padding: 4rem 3rem;
@@ -280,7 +277,6 @@
             box-shadow: 0 12px 30px rgba(26, 31, 58, 0.3);
         }
         
-        /* Footer */
         footer {
             background: var(--primary);
             color: white;
@@ -314,39 +310,6 @@
             color: var(--accent);
         }
         
-        /* Loading State */
-        .loading {
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-        
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Not Found */
-        .not-found {
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-        
-        .not-found h2 {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-        
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
@@ -365,22 +328,41 @@
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">Apex<span>360</span></a>
+            <a href="../index.html" class="logo">Apex<span>360</span></a>
             <ul class="nav-menu">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="otec.html">OTEC</a></li>
-                <li><a href="index.html#servicios">Servicios</a></li>
-                <li><a href="index.html#contacto">Contacto</a></li>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../otec.html">OTEC</a></li>
+                <li><a href="../index.html#servicios">Servicios</a></li>
+                <li><a href="../index.html#contacto">Contacto</a></li>
             </ul>
-            <a href="index.html#contacto" class="cta-button">Inscripción</a>
+            <a href="../index.html#contacto" class="cta-button">Inscripción</a>
         </nav>
     </header>
 
-    <div id="courseDetailContainer" class="course-detail">
+    <div class="course-detail">
         <div class="container">
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                <p>Cargando curso...</p>
+            <a href="../otec.html" class="back-button">← Volver a cursos</a>
+            
+            <div class="course-header">
+                <div class="container">
+                    <div class="course-header-content">
+                        <div class="course-badge">22</div>
+                        <h1>Titulo 6</h1>
+                        <p class="course-intro-text">szcmnsx,zcmnxz</p>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="course-content">
+                <div class="section-block"><p>No hay contenido disponible para este curso.</p></div>
+            </div>
+
+            <div class="cta-section">
+                <h2>¿Listo para inscribirte?</h2>
+                <p></p>
+                <a href="../index.html#contacto" class="cta-primary">Solicitar Inscripción</a>
             </div>
         </div>
     </div>
@@ -390,118 +372,12 @@
             <div class="footer-content">
                 <p>&copy; 2025 OTEC Apex Capacitaciones</p>
                 <div class="footer-links">
-                    <a href="index.html">Inicio</a>
-                    <a href="otec.html">Cursos</a>
-                    <a href="index.html#contacto">Contacto</a>
+                    <a href="../index.html">Inicio</a>
+                    <a href="../otec.html">Cursos</a>
+                    <a href="../index.html#contacto">Contacto</a>
                 </div>
             </div>
         </div>
     </footer>
-
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const courseId = parseInt(urlParams.get('id'));
-
-        function loadCourse() {
-            const container = document.getElementById('courseDetailContainer');
-            const stored = localStorage.getItem('otecCourses');
-            if (!stored) {
-                showNotFound();
-                return;
-            }
-
-            const courses = JSON.parse(stored);
-            const course = courses.find(c => c.id === courseId);
-
-            if (!course) {
-                showNotFound();
-                return;
-            }
-
-            document.getElementById('pageTitle').textContent = `${course.title} | OTEC Apex`;
-
-            container.innerHTML = `
-                <div class="container">
-                    <a href="otec.html" class="back-button">← Volver a cursos</a>
-                    
-                    <div class="course-header">
-                        <div class="container">
-                            <div class="course-header-content">
-                                <div class="course-badge">${course.duration}</div>
-                                <h1>${course.title}</h1>
-                                <p class="course-intro-text">${course.intro}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    ${course.image ? `
-                        <div class="course-image-container">
-                            <img src="${course.image}" alt="${course.title}" class="course-image-full">
-                        </div>
-                    ` : ''}
-
-                    <div class="course-content">
-                        ${course.sections && course.sections.length > 0 ? 
-                            course.sections.map(section => `
-                                <div class="section-block">
-                                    <h2>${section.subtitle}</h2>
-                                    <div>${formatContent(section.content)}</div>
-                                </div>
-                            `).join('') 
-                            : '<div class="section-block"><p>No hay contenido disponible para este curso.</p></div>'
-                        }
-                    </div>
-
-                    <div class="cta-section">
-                        <h2>¿Listo para inscribirte?</h2>
-                        <p>${course.dates || 'Consulta fechas disponibles'}</p>
-                        <a href="index.html#contacto" class="cta-primary">Solicitar Inscripción</a>
-                    </div>
-                </div>
-            `;
-        }
-
-        function formatContent(content) {
-            const lines = content.split('\n').filter(line => line.trim());
-            let html = '';
-            let inList = false;
-            
-            lines.forEach(line => {
-                const trimmed = line.trim();
-                if (trimmed.startsWith('*') || trimmed.startsWith('-')) {
-                    if (!inList) {
-                        html += '<ul>';
-                        inList = true;
-                    }
-                    html += `<li>${trimmed.substring(1).trim()}</li>`;
-                } else {
-                    if (inList) {
-                        html += '</ul>';
-                        inList = false;
-                    }
-                    html += `<p>${trimmed}</p>`;
-                }
-            });
-            
-            if (inList) html += '</ul>';
-            return html || `<p>${content}</p>`;
-        }
-
-        function showNotFound() {
-            document.getElementById('courseDetailContainer').innerHTML = `
-                <div class="container">
-                    <div class="not-found">
-                        <h2>Curso no encontrado</h2>
-                        <p>El curso que buscas no existe o ha sido eliminado.</p>
-                        <br>
-                        <a href="otec.html" class="cta-button">← Volver a cursos</a>
-                    </div>
-                </div>
-            `;
-        }
-
-        if (courseId) loadCourse();
-        else showNotFound();
-    </script>
 </body>
 </html>
