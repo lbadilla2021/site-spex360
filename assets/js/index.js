@@ -70,20 +70,52 @@ function handleDesktopCta() {
 handleDesktopCta();
 window.addEventListener('resize', handleDesktopCta);
 
-// Contact form mailto submission
+// Contact form submission via backend
 const contactForm = document.querySelector('.contact-form');
 
 if (contactForm) {
-    contactForm.addEventListener('submit', (event) => {
+    const feedback = contactForm.querySelector('.form-feedback');
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+
+    contactForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const name = contactForm.querySelector('input[name="name"]').value.trim();
-        const email = contactForm.querySelector('input[name="email"]').value.trim();
-        const comments = contactForm.querySelector('textarea[name="comments"]').value.trim();
+        const formData = new FormData(contactForm);
 
-        const subject = encodeURIComponent('Consulta desde el sitio Apex 360');
-        const body = encodeURIComponent(`Nombre: ${name}\nCorreo: ${email}\nComentarios:\n${comments}`);
+        if (feedback) {
+            feedback.textContent = '';
+            feedback.classList.remove('error', 'success');
+        }
 
-        window.location.href = `mailto:contacto@apex360.cl?subject=${subject}&body=${body}`;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+
+        try {
+            const response = await fetch('/send-contact.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || 'No pudimos enviar tu mensaje. Inténtalo nuevamente.');
+            }
+
+            if (feedback) {
+                feedback.textContent = result.message || '¡Gracias! Hemos recibido tu mensaje.';
+                feedback.classList.add('success');
+            }
+
+            contactForm.reset();
+        } catch (error) {
+            if (feedback) {
+                feedback.textContent = error.message || 'Ocurrió un error al enviar el mensaje. Inténtalo más tarde.';
+                feedback.classList.add('error');
+            }
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar mensaje';
+        }
     });
 }

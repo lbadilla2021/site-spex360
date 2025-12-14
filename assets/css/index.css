@@ -635,6 +635,21 @@ nav {
     gap: 1.25rem;
 }
 
+.contact-form .form-feedback {
+    min-height: 1.25rem;
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--primary);
+}
+
+.contact-form .form-feedback.error {
+    color: #c0392b;
+}
+
+.contact-form .form-feedback.success {
+    color: #1f8a4d;
+}
+
 .contact-form label {
     display: block;
     font-weight: 700;
@@ -668,6 +683,11 @@ nav {
 
 .contact-form .cta-button-primary {
     width: fit-content;
+}
+
+.contact-form .cta-button-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .cta-button-primary:hover {
