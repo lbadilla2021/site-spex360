@@ -1,151 +1,10 @@
-<?php
-/**
- * Generador de Cursos Estáticos - OTEC Apex
- * 
- * Este script lee los cursos desde LocalStorage (vía POST)
- * y genera archivos HTML estáticos en la carpeta /cursos/
- */
-
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
-
-if (!function_exists('str_starts_with')) {
-    function str_starts_with($haystack, $needle) {
-        return substr($haystack, 0, strlen($needle)) === $needle;
-    }
-}
-
-if (!function_exists('str_ends_with')) {
-    function str_ends_with($haystack, $needle) {
-        if ($needle === '') {
-            return true;
-        }
-        return substr($haystack, -strlen($needle)) === $needle;
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true);
-    
-    if (!$input || !isset($input['course'])) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Datos de curso no proporcionados']);
-        exit;
-    }
-    
-    $course = $input['course'];
-    $filename = sanitizeFilename($course['filename'] ?? '');
-
-    if (empty($filename)) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Nombre de archivo inválido']);
-        exit;
-    }
-    
-    // Generar HTML del curso
-    $html = generateCourseHTML($course);
-    
-    // Guardar archivo en carpeta cursos/
-    $cursosDir = __DIR__ . '/cursos';
-    if (!is_dir($cursosDir) && !mkdir($cursosDir, 0755, true)) {
-        http_response_code(500);
-        echo json_encode(['error' => 'No se pudo crear la carpeta cursos']);
-        exit;
-    }
-
-    if (!is_writable($cursosDir)) {
-        http_response_code(500);
-        echo json_encode(['error' => 'La carpeta cursos no tiene permisos de escritura']);
-        exit;
-    }
-
-    $filepath = $cursosDir . '/' . $filename;
-    $result = file_put_contents($filepath, $html, LOCK_EX);
-
-    if ($result !== false) {
-        @chmod($filepath, 0644);
-        echo json_encode([
-            'success' => true,
-            'filename' => $filename,
-            'path' => '/cursos/' . $filename,
-            'message' => 'Curso generado exitosamente'
-        ]);
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'Error al escribir archivo']);
-    }
-} else {
-    http_response_code(405);
-    echo json_encode(['error' => 'Método no permitido']);
-}
-
-function sanitizeFilename($filename) {
-    if (!$filename) {
-        return '';
-    }
-
-    // 1️⃣ Quitar .html si viene incluido
-    $filename = preg_replace('/\.html?$/i', '', $filename);
-
-    // 2️⃣ Sanitizar
-    $sanitized = preg_replace('/[^a-zA-Z0-9_-]+/', '-', $filename);
-    $sanitized = trim($sanitized, '-');
-
-    if ($sanitized === '') {
-        return '';
-    }
-
-    // 3️⃣ Agregar .html UNA sola vez
-    return $sanitized . '.html';
-}
-
-function generateCourseHTML($course) {
-    $title = htmlspecialchars($course['title']);
-    $duration = htmlspecialchars($course['duration']);
-    $intro = htmlspecialchars($course['intro']);
-    $dates = htmlspecialchars($course['dates'] ?? 'Consulta fechas disponibles');
-    $image = htmlspecialchars($course['image'] ?? '');
-    
-    // Generar secciones
-    $sectionsHTML = '';
-    if (!empty($course['sections'])) {
-        foreach ($course['sections'] as $section) {
-            $subtitle = htmlspecialchars($section['subtitle']);
-            $content = formatContent($section['content']);
-            
-            $sectionsHTML .= <<<HTML
-                <div class="section-block">
-                    <h2>{$subtitle}</h2>
-                    <div>{$content}</div>
-                </div>
-
-HTML;
-        }
-    } else {
-        $sectionsHTML = '<div class="section-block"><p>No hay contenido disponible para este curso.</p></div>';
-    }
-    
-    // Sección de imagen (si existe)
-    $imageHTML = '';
-    if (!empty($image)) {
-        $imageHTML = <<<HTML
-            <div class="course-image-container">
-                <img src="{$image}" alt="{$title}" class="course-image-full">
-            </div>
-HTML;
-    }
-    
-    // HTML completo
-    return <<<HTML
 <!DOCTYPE html>
 <html lang="es-CL">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{$title} | OTEC Apex</title>
-    <meta name="description" content="{$intro}">
+    <title>titulo 5 | OTEC Apex</title>
+    <meta name="description" content="sakdñaslkd">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -469,14 +328,14 @@ HTML;
 <body>
     <header>
         <nav>
-            <a href="../index.html" class="logo">Apex<span>360</span></a>
+            <a href="../apex360-landing.html" class="logo">Apex<span>360</span></a>
             <ul class="nav-menu">
-                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../apex360-landing.html">Inicio</a></li>
                 <li><a href="../otec.html">OTEC</a></li>
-                <li><a href="../index.html#servicios">Servicios</a></li>
-                <li><a href="../index.html#contacto">Contacto</a></li>
+                <li><a href="../apex360-landing.html#servicios">Servicios</a></li>
+                <li><a href="../apex360-landing.html#contacto">Contacto</a></li>
             </ul>
-            <a href="../index.html#contacto" class="cta-button">Inscripción</a>
+            <a href="../apex360-landing.html#contacto" class="cta-button">Inscripción</a>
         </nav>
     </header>
 
@@ -487,23 +346,23 @@ HTML;
             <div class="course-header">
                 <div class="container">
                     <div class="course-header-content">
-                        <div class="course-badge">{$duration}</div>
-                        <h1>{$title}</h1>
-                        <p class="course-intro-text">{$intro}</p>
+                        <div class="course-badge">44</div>
+                        <h1>titulo 5</h1>
+                        <p class="course-intro-text">sakdñaslkd</p>
                     </div>
                 </div>
             </div>
 
-            {$imageHTML}
+            
 
             <div class="course-content">
-                {$sectionsHTML}
+                <div class="section-block"><p>No hay contenido disponible para este curso.</p></div>
             </div>
 
             <div class="cta-section">
                 <h2>¿Listo para inscribirte?</h2>
-                <p>{$dates}</p>
-                <a href="../index.html#contacto" class="cta-primary">Solicitar Inscripción</a>
+                <p></p>
+                <a href="../apex360-landing.html#contacto" class="cta-primary">Solicitar Inscripción</a>
             </div>
         </div>
     </div>
@@ -513,46 +372,12 @@ HTML;
             <div class="footer-content">
                 <p>&copy; 2025 OTEC Apex Capacitaciones</p>
                 <div class="footer-links">
-                    <a href="../index.html">Inicio</a>
+                    <a href="../apex360-landing.html">Inicio</a>
                     <a href="../otec.html">Cursos</a>
-                    <a href="../index.html#contacto">Contacto</a>
+                    <a href="../apex360-landing.html#contacto">Contacto</a>
                 </div>
             </div>
         </div>
     </footer>
 </body>
 </html>
-HTML;
-}
-
-function formatContent($content) {
-    $lines = array_filter(explode("\n", $content), 'trim');
-    $html = '';
-    $inList = false;
-    
-    foreach ($lines as $line) {
-        $trimmed = trim($line);
-        
-        if (str_starts_with($trimmed, '*') || str_starts_with($trimmed, '-')) {
-            if (!$inList) {
-                $html .= '<ul>';
-                $inList = true;
-            }
-            $item = htmlspecialchars(trim(substr($trimmed, 1)));
-            $html .= "<li>{$item}</li>";
-        } else {
-            if ($inList) {
-                $html .= '</ul>';
-                $inList = false;
-            }
-            $html .= '<p>' . htmlspecialchars($trimmed) . '</p>';
-        }
-    }
-    
-    if ($inList) {
-        $html .= '</ul>';
-    }
-    
-    return $html ?: '<p>' . htmlspecialchars($content) . '</p>';
-}
-?>

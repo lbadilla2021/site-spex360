@@ -1270,4 +1270,16 @@
         function handleDesktopCta() {
             const desktopCta = document.getElementById('desktopCta');
             const navMenu = document.getElementById('navMenu');
-    
+            if (window.innerWidth >= 768) {
+                        desktopCta.style.display = 'inline-block';
+                        navMenu.style.display = 'flex';
+                    } else {
+                        desktopCta.style.display = 'none';
+                    }
+                }
+        
+        handleDesktopCta();
+        window.addEventListener('resize', handleDesktopCta);
+    </script>
+</body>
+</html>
