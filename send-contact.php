@@ -41,6 +41,7 @@ $body = "Nombre: {$name}\nCorreo: {$email}\nComentarios:\n{$comments}\n";
 $headers = "From: contacto@apex360.cl\r\n";
 $headers .= "Reply-To: {$email}\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+$headers .= "Content-Transfer-Encoding: 8bit\r\n";
 
 class SimpleSmtpMailer
 {
@@ -115,15 +116,17 @@ class SimpleSmtpMailer
 
         stream_set_timeout($connection, $this->timeout);
 
+        $hostname = gethostname() ?: 'localhost';
+
         $this->sendCommand($connection, '', '220');
-        $this->sendCommand($connection, 'EHLO apex360.local', '250');
+        $this->sendCommand($connection, 'EHLO ' . $hostname, '250');
 
         if ($this->encryption === 'tls') {
             $this->sendCommand($connection, 'STARTTLS', '220');
             if (!stream_socket_enable_crypto($connection, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
                 throw new RuntimeException('No se pudo negociar TLS con el servidor SMTP');
             }
-            $this->sendCommand($connection, 'EHLO apex360.local', '250');
+            $this->sendCommand($connection, 'EHLO ' . $hostname, '250');
         }
 
         if ($this->username && $this->password) {
@@ -136,7 +139,11 @@ class SimpleSmtpMailer
         $this->sendCommand($connection, 'RCPT TO: <' . $to . '>', '250');
         $this->sendCommand($connection, 'DATA', '354');
 
-        $message = $headers . "\r\n" . $body . "\r\n.";
+        $message = '';
+        $message .= $headers;
+        $message .= 'To: ' . $to . "\r\n";
+        $message .= 'Subject: ' . $subject . "\r\n";
+        $message .= "\r\n" . $body . "\r\n.";
         $this->sendCommand($connection, $message, '250');
         $this->sendCommand($connection, 'QUIT', '221');
         fclose($connection);
@@ -149,8 +156,16 @@ $smtpHost = getenv('SMTP_HOST') ?: '';
 $smtpPort = (int) (getenv('SMTP_PORT') ?: 587);
 $smtpUser = getenv('SMTP_USER') ?: null;
 $smtpPass = getenv('SMTP_PASS') ?: null;
-$smtpSecure = getenv('SMTP_SECURE') ?: 'tls';
+$smtpSecure = strtolower(getenv('SMTP_SECURE') ?: 'tls');
 $smtpFrom = getenv('SMTP_FROM') ?: 'contacto@apex360.cl';
+
+if ($smtpHost === '') {
+    $respond(false, 'El envío de correos no está configurado. Define SMTP_HOST en las variables de entorno.', 500);
+}
+
+if (!in_array($smtpSecure, ['tls', 'ssl', 'none'], true)) {
+    $respond(false, 'Configuración SMTP inválida: usa tls, ssl o none para SMTP_SECURE.', 400);
+}
 
 try {
     if ($smtpHost !== '') {
