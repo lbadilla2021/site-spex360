@@ -14,6 +14,12 @@ COPY blog/ /var/www/html/blog/
 # Copiar carpeta cursos
 COPY cursos/ /var/www/html/cursos/
 
+# Copiar carpeta admin protegida
+COPY admin/ /var/www/html/admin/
+
+# Archivo de contraseñas para el área admin
+COPY .htpasswd /etc/nginx/.htpasswd
+
 # Crear carpeta cursos con permisos de escritura
 RUN mkdir -p /var/www/html/cursos && \
     chown -R nginx:nginx /var/www/html/cursos && \
