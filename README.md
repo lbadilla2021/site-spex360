@@ -151,7 +151,7 @@ docker-compose up -d
 
 Ahora puedes editar archivos y verás cambios inmediatos.
 
----
+---https://github.com/lbadilla2021/site-spex360/pull/16/conflict?name=send-contact.php&ancestor_oid=8ac177fdc7b6f5e6972b5c55841f90e720bc223b&base_oid=9208a9996564712f4ae153be3f6cf52d5ee946d2&head_oid=8645cb46879e0affe796376d8ae7d87d22794c35
 
 ### 🌐 Configurar Dominio
 

@@ -101,7 +101,7 @@ class SimpleSmtpMailer
             ];
         }
 
-        $connection = stream_socket_client(
+        $connection = @stream_socket_client(
             $transport . $this->host . ':' . $this->port,
             $errno,
             $errstr,
