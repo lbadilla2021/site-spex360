@@ -1,25 +1,27 @@
 let allArticles = [];
 let currentCategory = 'todas';
 
-function loadArticles() {
+async function loadArticles() {
     const stored = localStorage.getItem('blogArticles');
     if (stored) {
         allArticles = JSON.parse(stored);
-    } else {
-        // Default article
-        allArticles = [
-            {
-                id: 1,
-                title: "Automatizaciones en RRHH: Cómo la IA está Transformando la Gestión de Personas",
-                summary: "Descubre cómo las automatizaciones y la inteligencia artificial están revolucionando los procesos de recursos humanos, desde reclutamiento hasta análisis predictivo de rotación.",
-                category: "Transformación Digital",
-                filename: "automatizaciones-rrhh.html",
-                date: "2025-01-15",
-                image: ""
-            }
-        ];
-        saveArticles();
+        renderArticles();
+        return;
     }
+
+    try {
+        const response = await fetch('/assets/data/blog-articulos.json');
+        if (!response.ok) {
+            throw new Error('No se pudieron cargar los artículos predeterminados');
+        }
+
+        allArticles = await response.json();
+        saveArticles();
+    } catch (error) {
+        console.error(error);
+        allArticles = [];
+    }
+
     renderArticles();
 }
 

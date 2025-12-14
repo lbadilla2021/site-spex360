@@ -1,11 +1,27 @@
 let articles = [];
 let editingId = null;
 
-function loadArticles() {
+async function loadArticles() {
     const stored = localStorage.getItem('blogArticles');
     if (stored) {
         articles = JSON.parse(stored);
+        renderTable();
+        return;
     }
+
+    try {
+        const response = await fetch('/assets/data/blog-articulos.json');
+        if (!response.ok) {
+            throw new Error('No se pudieron cargar los artículos predeterminados');
+        }
+
+        articles = await response.json();
+        localStorage.setItem('blogArticles', JSON.stringify(articles));
+    } catch (error) {
+        console.error(error);
+        articles = [];
+    }
+
     renderTable();
 }
 
