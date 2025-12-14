@@ -1,12 +1,27 @@
+const COURSES_DATA_URL = '/assets/data/cursos.json';
 let courses = [];
 let editingId = null;
 let sectionCounter = 0;
 
-function loadCourses() {
+async function loadCourses() {
     const stored = localStorage.getItem('otecCourses');
     if (stored) {
         courses = JSON.parse(stored);
+        renderTable();
+        return;
     }
+
+    try {
+        const response = await fetch(COURSES_DATA_URL);
+        if (!response.ok) throw new Error('No se pudo obtener cursos');
+        const data = await response.json();
+        courses = Array.isArray(data) ? data : [];
+        localStorage.setItem('otecCourses', JSON.stringify(courses));
+    } catch (error) {
+        console.error('Error cargando cursos desde JSON:', error);
+        courses = [];
+    }
+
     renderTable();
 }
 
@@ -658,8 +673,8 @@ function deleteCourse(id) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadCourses();
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadCourses();
 });
 
 window.openModal = openModal;
