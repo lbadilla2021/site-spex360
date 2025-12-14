@@ -23,6 +23,43 @@ $sanitize = static function (string $value): string {
     return trim(preg_replace("/(\r|\n)/", '', $value));
 };
 
+/**
+ * Carga variables desde un archivo .env simple, ignorando líneas vacías y comentarios.
+ */
+$loadDotEnv = static function (string $path): void {
+    if (!is_readable($path)) {
+        return;
+    }
+
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $trimmed = ltrim($line);
+        if ($trimmed === '' || $trimmed[0] === '#') {
+            continue;
+        }
+
+        [$key, $value] = array_pad(explode('=', $line, 2), 2, '');
+        $key = trim($key);
+        $value = trim($value);
+
+        if ($key === '') {
+            continue;
+        }
+
+        $hasDoubleQuotes = isset($value[0], $value[strlen($value) - 1]) && $value[0] === '"' && substr($value, -1) === '"';
+        $hasSingleQuotes = isset($value[0], $value[strlen($value) - 1]) && $value[0] === "'" && substr($value, -1) === "'";
+        if ($hasDoubleQuotes || $hasSingleQuotes) {
+            $value = substr($value, 1, -1);
+        }
+
+        if (getenv($key) === false || getenv($key) === '') {
+            putenv($key . '=' . $value);
+        }
+    }
+};
+
+$loadDotEnv(__DIR__ . '/.env');
+
 $name = $sanitize($_POST['name'] ?? '');
 $email = $sanitize($_POST['email'] ?? '');
 $comments = trim($_POST['comments'] ?? '');
@@ -171,11 +208,13 @@ try {
     if ($smtpHost !== '') {
         $mailer = new SimpleSmtpMailer($smtpHost, $smtpPort, $smtpSecure, $smtpUser, $smtpPass);
         $mailer->send($smtpFrom, $to, $subject, $body, $headers);
-    } else {
+    } elseif ($sendmailAvailable) {
         $mailSent = mail($to, $subject, $body, $headers, '-fcontacto@apex360.cl');
         if (!$mailSent) {
             throw new RuntimeException('No se pudo enviar el correo usando sendmail local. Configura SMTP_HOST para usar un servidor externo.');
         }
+    } else {
+        $respond(false, 'El envío de correos no está configurado. Define SMTP_HOST en las variables de entorno.', 500);
     }
 } catch (Throwable $exception) {
     error_log('Contacto Apex 360: fallo el envío de correo - ' . $exception->getMessage());
