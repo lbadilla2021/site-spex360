@@ -147,7 +147,7 @@ async function saveCourse(e) {
 }
 
 async function sendCourseToServer(action, course) {
-    const response = await fetch('generate-course.php', {
+    const response = await fetch('/generate-course.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
