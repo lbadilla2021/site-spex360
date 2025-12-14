@@ -129,7 +129,9 @@ async function saveCourse(e) {
         : courses.length > 0 ? Math.max(...courses.map(c => c.id)) + 1 : 1;
 
     const coursePayload = { ...courseData, id: courseId, filename };
-    const action = isEdit ? 'update' : 'create';
+    // Usamos nombres de acción equivalentes a los del flujo de blog para
+    // máxima compatibilidad con el backend PHP (create_course/update_course).
+    const action = isEdit ? 'update_course' : 'create_course';
 
     try {
         const response = await sendCourseToServer(action, coursePayload);
@@ -147,7 +149,7 @@ async function saveCourse(e) {
 }
 
 async function sendCourseToServer(action, course) {
-    const response = await fetch('generate-course.php', {
+    const response = await fetch('/generate-course.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -656,7 +658,7 @@ function editCourse(id) {
 
 function deleteCourse(id) {
     if (confirm('¿Estás seguro de eliminar este curso?')) {
-        sendCourseToServer('delete', { id })
+        sendCourseToServer('delete_course', { id })
             .then(response => {
                 courses = Array.isArray(response?.courses) ? response.courses : courses.filter(c => c.id !== id);
                 renderTable();
