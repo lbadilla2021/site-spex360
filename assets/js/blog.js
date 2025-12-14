@@ -2,15 +2,8 @@ let allArticles = [];
 let currentCategory = 'todas';
 
 async function loadArticles() {
-    const stored = localStorage.getItem('blogArticles');
-    if (stored) {
-        allArticles = JSON.parse(stored);
-        renderArticles();
-        return;
-    }
-
     try {
-        const response = await fetch('/assets/data/blog-articulos.json');
+        const response = await fetch('/assets/data/blog-articulos.json', { cache: 'no-cache' });
         if (!response.ok) {
             throw new Error('No se pudieron cargar los artículos predeterminados');
         }
@@ -19,7 +12,8 @@ async function loadArticles() {
         saveArticles();
     } catch (error) {
         console.error(error);
-        allArticles = [];
+        const stored = localStorage.getItem('blogArticles');
+        allArticles = stored ? JSON.parse(stored) : [];
     }
 
     renderArticles();
