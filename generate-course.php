@@ -11,6 +11,21 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
+if (!function_exists('str_starts_with')) {
+    function str_starts_with($haystack, $needle) {
+        return substr($haystack, 0, strlen($needle)) === $needle;
+    }
+}
+
+if (!function_exists('str_ends_with')) {
+    function str_ends_with($haystack, $needle) {
+        if ($needle === '') {
+            return true;
+        }
+        return substr($haystack, -strlen($needle)) === $needle;
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     
@@ -21,21 +36,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     $course = $input['course'];
-    $filename = $course['filename'];
+    $filename = sanitizeFilename($course['filename'] ?? '');
+
+    if (empty($filename)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Nombre de archivo inválido']);
+        exit;
+    }
     
     // Generar HTML del curso
     $html = generateCourseHTML($course);
     
     // Guardar archivo en carpeta cursos/
     $cursosDir = __DIR__ . '/cursos';
-    if (!file_exists($cursosDir)) {
-        mkdir($cursosDir, 0755, true);
+    if (!is_dir($cursosDir) && !mkdir($cursosDir, 0755, true)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'No se pudo crear la carpeta cursos']);
+        exit;
     }
-    
+
+    if (!is_writable($cursosDir)) {
+        http_response_code(500);
+        echo json_encode(['error' => 'La carpeta cursos no tiene permisos de escritura']);
+        exit;
+    }
+
     $filepath = $cursosDir . '/' . $filename;
-    $result = file_put_contents($filepath, $html);
-    
+    $result = file_put_contents($filepath, $html, LOCK_EX);
+
     if ($result !== false) {
+        @chmod($filepath, 0644);
         echo json_encode([
             'success' => true,
             'filename' => $filename,
@@ -49,6 +79,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     http_response_code(405);
     echo json_encode(['error' => 'Método no permitido']);
+}
+
+function sanitizeFilename($filename) {
+    $sanitized = preg_replace('/[^a-zA-Z0-9_-]+/', '-', $filename ?? '');
+    $sanitized = trim($sanitized, '-');
+
+    if (empty($sanitized)) {
+        return '';
+    }
+
+    if (!str_ends_with($sanitized, '.html')) {
+        $sanitized .= '.html';
+    }
+
+    return $sanitized;
 }
 
 function generateCourseHTML($course) {
