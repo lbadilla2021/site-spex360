@@ -17,50 +17,5 @@
                 "content": "VLOOKUP, INDEX-MATCH, y funciones condicionales"
             }
         ]
-    },
-    {
-        "id": 3,
-        "title": "Curso Español",
-        "duration": "22",
-        "intro": "Cdksaldjalskdjlaskjdl",
-        "image": "",
-        "dates": "",
-        "filename": "curso-espanol.html",
-        "sections": []
-    },
-    {
-        "id": 5,
-        "title": "Curso Chino",
-        "duration": "22",
-        "intro": "aasdsadalklklkkklk",
-        "image": "",
-        "dates": "",
-        "filename": "curso-chino.html",
-        "sections": [
-            {
-                "subtitle": "1",
-                "content": "dasdasd"
-            }
-        ]
-    },
-    {
-        "id": 6,
-        "title": "Curso Aleman",
-        "duration": "22",
-        "intro": "asdadsad",
-        "image": "",
-        "dates": "",
-        "filename": "curso-aleman.html",
-        "sections": []
-    },
-    {
-        "id": 7,
-        "title": "Curso Maquinas",
-        "duration": "11",
-        "intro": "saasdadads",
-        "image": "",
-        "dates": "",
-        "filename": "curso-maquinas.html",
-        "sections": []
     }
 ]
