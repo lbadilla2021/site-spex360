@@ -17,13 +17,12 @@ services:
       - SMTP_FROM=${SMTP_FROM:-contacto@apex360.cl}
     volumes:
       - ./cursos:/var/www/html/cursos
+      - ./admin:/var/www/html/admin
       - ./blog:/var/www/html/blog
       - ./assets:/var/www/html/assets
       - ./index.html:/var/www/html/index.html
       - ./otec.html:/var/www/html/otec.html
-      - ./otec-admin.html:/var/www/html/otec-admin.html
       - ./blog.html:/var/www/html/blog.html
-      - ./blog-admin.html:/var/www/html/blog-admin.html
     networks:
       - nocobase-network
     labels:
