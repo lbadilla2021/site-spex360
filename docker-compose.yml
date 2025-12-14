@@ -15,11 +15,11 @@ services:
       # Carpeta blog - PERSISTENTE
       - ./blog:/var/www/html/blog
     networks:
-      - apex-network
+      - nocobase-network
     labels:
       - "traefik.enable=false"
       - "com.apex360.description=Apex 360 Landing Page & OTEC"
 
 networks:
-  apex-network:
+  nocobase-network:
     driver: bridge
