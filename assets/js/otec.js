@@ -4,28 +4,17 @@ const COURSES_DATA_URL = '/assets/data/cursos.json';
 let currentPage = 1;
 let allCourses = [];
 
-// Load courses from localStorage or fallback JSON
+// Load courses from cursos.json (sin persistencia local para mantener datos actualizados)
 async function loadCourses() {
-    const stored = localStorage.getItem('otecCourses');
-    if (stored) {
-        allCourses = JSON.parse(stored);
-        return;
-    }
-
     try {
-        const response = await fetch(COURSES_DATA_URL);
+        const response = await fetch(COURSES_DATA_URL, { cache: 'no-cache' });
         if (!response.ok) throw new Error('No se pudo obtener cursos');
         const data = await response.json();
         allCourses = Array.isArray(data) ? data : [];
-        saveCourses();
     } catch (error) {
         console.error('Error cargando cursos desde JSON:', error);
         allCourses = [];
     }
-}
-
-function saveCourses() {
-    localStorage.setItem('otecCourses', JSON.stringify(allCourses));
 }
 
 function renderCourses() {
