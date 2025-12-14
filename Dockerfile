@@ -5,6 +5,9 @@ FROM richarvey/nginx-php-fpm:latest
 COPY *.html /var/www/html/
 COPY *.php /var/www/html/
 
+# Copiar carpeta assets
+COPY assets/ /var/www/html/assets/
+
 # Copiar carpeta blog
 COPY blog/ /var/www/html/blog/
 
