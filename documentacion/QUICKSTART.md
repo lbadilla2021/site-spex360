@@ -39,7 +39,7 @@ cd /opt/apex360
 # - apex360-landing.html
 # - otec.html  
 # - curso-detalle.html
-# - otec-admin.html
+# - admin/otec-admin.html
 # - Dockerfile
 # - docker-compose.yml
 # - nginx.conf
@@ -60,7 +60,7 @@ Una vez desplegado, accede a:
 
 - **Landing Principal:** `http://TU_IP:9500/apex360-landing.html`
 - **OTEC (Cursos):** `http://TU_IP:9500/otec.html`
-- **Panel Admin:** `http://TU_IP:9500/otec-admin.html`
+- **Panel Admin:** `http://TU_IP:9500/admin/otec-admin.html`
 
 ---
 
@@ -181,7 +181,7 @@ sudo ufw reload
 ├── apex360-landing.html
 ├── otec.html
 ├── curso-detalle.html
-├── otec-admin.html
+├── admin/otec-admin.html
 ├── Dockerfile
 ├── docker-compose.yml
 ├── nginx.conf

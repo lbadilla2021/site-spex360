@@ -21,7 +21,7 @@
 ```
 apex360/
 ├── otec.html (landing cursos)
-├── otec-admin.html (panel administración)
+├── admin/otec-admin.html (panel administración)
 └── cursos/ (📁 NUEVA CARPETA)
     ├── curso-google-sheets-avanzado.html
     ├── tecnicas-trabajo-alturas.html
@@ -37,7 +37,7 @@ apex360/
 
 ### **1. Crear Curso en Admin**
 
-En `otec-admin.html`:
+En `admin/otec-admin.html`:
 1. Click "+ Nuevo Curso"
 2. Llenar formulario:
    - **Título:** "Curso de Google Sheets Avanzado"
@@ -269,7 +269,7 @@ docker exec apex360-landing ls /usr/share/nginx/html/cursos/
 
 ## 📝 **Archivos Actualizados**
 
-1. **otec-admin.html** - Genera HTML automáticamente
+1. **admin/otec-admin.html** - Genera HTML automáticamente
 2. **otec.html** - Enlaces a `/cursos/filename.html`
 3. **Dockerfile** - Copia carpeta `/cursos/`
 4. **Cursos de ejemplo** - Ahora incluyen campo `filename`

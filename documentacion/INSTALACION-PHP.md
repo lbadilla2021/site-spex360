@@ -19,7 +19,7 @@ He actualizado 3 archivos para que funcione PHP:
 scp Dockerfile root@65.108.150.100:/root/docker/site-apex/
 scp nginx-php.conf root@65.108.150.100:/root/docker/site-apex/
 scp generate-course.php root@65.108.150.100:/root/docker/site-apex/
-scp otec-admin.html root@65.108.150.100:/root/docker/site-apex/
+scp admin/otec-admin.html root@65.108.150.100:/root/docker/site-apex/
 ```
 
 ### **Paso 2: Conectar al VPS**
@@ -100,7 +100,7 @@ docker exec apex360-landing ls -ld /var/www/html/cursos
 
 ### **Test 3: Crear Curso de Prueba**
 
-1. Abrir: `http://65.108.150.100:9500/otec-admin.html`
+1. Abrir: `http://65.108.150.100:9500/admin/otec-admin.html`
 2. Click "+ Nuevo Curso"
 3. Llenar datos:
    - Título: "Curso de Prueba PHP"
@@ -202,11 +202,11 @@ Genera archivos: ✅ Automático en /cursos/
 ├── docker-compose.yml
 ├── nginx.conf (✅ reemplazado por nginx-php.conf)
 ├── generate-course.php (✅ nuevo)
-├── otec-admin.html (✅ actualizado)
+├── admin/otec-admin.html (✅ actualizado)
 ├── otec.html
 ├── apex360-landing.html
 ├── blog.html
-├── blog-admin.html
+├── admin/blog-admin.html
 ├── blog/
 │   └── automatizaciones-rrhh.html
 └── cursos/ (✅ carpeta con permisos de escritura)
@@ -221,7 +221,7 @@ Genera archivos: ✅ Automático en /cursos/
 
 1. **Abrir Admin:**
    ```
-   http://65.108.150.100:9500/otec-admin.html
+   http://65.108.150.100:9500/admin/otec-admin.html
    ```
 
 2. **Crear Curso:**
@@ -266,7 +266,7 @@ volumes:
 ### **Actualizar Código:**
 ```bash
 # Solo actualizar archivos (sin rebuild)
-docker cp otec-admin.html apex360-landing:/var/www/html/
+docker cp admin/otec-admin.html apex360-landing:/var/www/html/
 docker cp generate-course.php apex360-landing:/var/www/html/
 
 # Rebuild completo (si cambias Dockerfile)

@@ -26,7 +26,7 @@ cd /opt/apex360
 # - apex360-landing.html
 # - otec.html
 # - curso-detalle.html
-# - otec-admin.html
+# - admin/otec-admin.html
 # - Dockerfile
 # - docker-compose.yml
 # - nginx.conf
@@ -141,7 +141,7 @@ volumes:
   - ./apex360-landing.html:/usr/share/nginx/html/apex360-landing.html:ro
   - ./otec.html:/usr/share/nginx/html/otec.html:ro
   - ./curso-detalle.html:/usr/share/nginx/html/curso-detalle.html:ro
-  - ./otec-admin.html:/usr/share/nginx/html/otec-admin.html:ro
+  - ./admin/otec-admin.html:/usr/share/nginx/html/admin/otec-admin.html:ro
 ```
 
 Luego:
@@ -247,7 +247,7 @@ docker-compose up -d --build
 ├── apex360-landing.html    # Landing principal
 ├── otec.html               # Landing OTEC
 ├── curso-detalle.html      # Detalle de curso
-├── otec-admin.html         # Panel administración
+├── admin/otec-admin.html         # Panel administración
 ├── Dockerfile              # Configuración Docker
 ├── docker-compose.yml      # Orquestación
 ├── nginx.conf              # Config Nginx
@@ -378,7 +378,7 @@ Gzip ya habilitado en `nginx.conf`.
 **URLs del sitio:**
 - Landing principal: `http://tu-ip:9500/apex360-landing.html`
 - OTEC: `http://tu-ip:9500/otec.html`
-- Admin: `http://tu-ip:9500/otec-admin.html`
+- Admin: `http://tu-ip:9500/admin/otec-admin.html`
 
 ---
 
