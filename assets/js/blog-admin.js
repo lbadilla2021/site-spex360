@@ -2,15 +2,8 @@ let articles = [];
 let editingId = null;
 
 async function loadArticles() {
-    const stored = localStorage.getItem('blogArticles');
-    if (stored) {
-        articles = JSON.parse(stored);
-        renderTable();
-        return;
-    }
-
     try {
-        const response = await fetch('/assets/data/blog-articulos.json');
+        const response = await fetch('/assets/data/blog-articulos.json', { cache: 'no-cache' });
         if (!response.ok) {
             throw new Error('No se pudieron cargar los artículos predeterminados');
         }
@@ -19,7 +12,8 @@ async function loadArticles() {
         localStorage.setItem('blogArticles', JSON.stringify(articles));
     } catch (error) {
         console.error(error);
-        articles = [];
+        const stored = localStorage.getItem('blogArticles');
+        articles = stored ? JSON.parse(stored) : [];
     }
 
     renderTable();
@@ -79,10 +73,11 @@ function closeModal() {
     document.getElementById('articleModal').classList.remove('active');
 }
 
-function saveArticle(e) {
+async function saveArticle(e) {
     e.preventDefault();
 
     const articleData = {
+        id: editingId,
         title: document.getElementById('articleTitle').value,
         summary: document.getElementById('articleSummary').value,
         category: document.getElementById('articleCategory').value,
@@ -91,31 +86,65 @@ function saveArticle(e) {
         image: document.getElementById('articleImage').value
     };
 
-    if (editingId) {
-        const index = articles.findIndex(a => a.id === editingId);
-        articles[index] = { ...articles[index], ...articleData };
-    } else {
-        const newId = articles.length > 0 ? Math.max(...articles.map(a => a.id)) + 1 : 1;
-        articles.push({ id: newId, ...articleData });
+    const payload = {
+        action: editingId ? 'update_blog' : 'create_blog',
+        article: articleData
+    };
+
+    try {
+        const response = await fetch('/generate-course.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.error || 'No se pudo guardar el artículo');
+        }
+
+        articles = data.articles;
+        localStorage.setItem('blogArticles', JSON.stringify(articles));
+        renderTable();
+        closeModal();
+
+        alert(editingId ? 'Artículo actualizado y publicado' : 'Artículo creado y publicado');
+    } catch (error) {
+        console.error(error);
+        alert(error.message || 'Ocurrió un error al guardar el artículo');
     }
-
-    localStorage.setItem('blogArticles', JSON.stringify(articles));
-    renderTable();
-    closeModal();
-
-    alert(editingId ? 'Artículo actualizado exitosamente' : 'Artículo creado exitosamente');
 }
 
 function editArticle(id) {
     openModal(id);
 }
 
-function deleteArticle(id) {
-    if (confirm('¿Estás seguro de eliminar este artículo?')) {
-        articles = articles.filter(a => a.id !== id);
+async function deleteArticle(id) {
+    if (!confirm('¿Estás seguro de eliminar este artículo?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch('/generate-course.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'delete_blog', id })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.error || 'No se pudo eliminar el artículo');
+        }
+
+        articles = data.articles;
         localStorage.setItem('blogArticles', JSON.stringify(articles));
         renderTable();
-        alert('Artículo eliminado exitosamente');
+        alert('Artículo eliminado y despublicado');
+    } catch (error) {
+        console.error(error);
+        alert(error.message || 'Ocurrió un error al eliminar el artículo');
     }
 }
 
