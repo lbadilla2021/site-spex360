@@ -60,6 +60,7 @@ function openModal(id = null) {
             document.getElementById('articleFilename').value = article.filename;
             document.getElementById('articleDate').value = article.date;
             document.getElementById('articleImage').value = article.image || '';
+            document.getElementById('articleContent').value = article.content || '';
         }
     } else {
         document.getElementById('modalTitle').textContent = 'Nuevo Artículo';
@@ -83,7 +84,8 @@ async function saveArticle(e) {
         category: document.getElementById('articleCategory').value,
         filename: document.getElementById('articleFilename').value,
         date: document.getElementById('articleDate').value,
-        image: document.getElementById('articleImage').value
+        image: document.getElementById('articleImage').value,
+        content: document.getElementById('articleContent').value
     };
 
     const payload = {
