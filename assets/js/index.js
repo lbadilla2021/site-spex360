@@ -69,3 +69,21 @@ function handleDesktopCta() {
 
 handleDesktopCta();
 window.addEventListener('resize', handleDesktopCta);
+
+// Contact form mailto submission
+const contactForm = document.querySelector('.contact-form');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const name = contactForm.querySelector('input[name="name"]').value.trim();
+        const email = contactForm.querySelector('input[name="email"]').value.trim();
+        const comments = contactForm.querySelector('textarea[name="comments"]').value.trim();
+
+        const subject = encodeURIComponent('Consulta desde el sitio Apex 360');
+        const body = encodeURIComponent(`Nombre: ${name}\nCorreo: ${email}\nComentarios:\n${comments}`);
+
+        window.location.href = `mailto:contacto@apex360.cl?subject=${subject}&body=${body}`;
+    });
+}
