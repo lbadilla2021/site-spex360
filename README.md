@@ -378,7 +378,9 @@ Gzip ya habilitado en `nginx.conf`.
 **URLs del sitio:**
 - Landing principal: `http://tu-ip:9500/apex360-landing.html`
 - OTEC: `http://tu-ip:9500/otec.html`
-- Admin: `http://tu-ip:9500/admin/otec-admin.html`
+- Admin: `http://tu-ip:9500/admin/otec-admin.html` (protegido con usuario `lbadilla1970` y clave `CerroColorado.2020`)
+
+> ⚠️ Si prefieres otras credenciales, edita `.htpasswd` antes de desplegar (usa `openssl passwd -apr1 "tu-clave"` para generar el hash) y reemplaza el usuario según necesites.
 
 ---
 
