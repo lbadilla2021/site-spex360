@@ -93,6 +93,32 @@ docker exec apex360-landing ls -la /usr/share/nginx/html/
 
 ---
 
+### 📧 Configurar envío de correos
+
+El contenedor no incluye un servidor de correo local. Para que el formulario de contacto funcione debes apuntar a un servidor SMTP externo mediante variables de entorno (en `.env` o exportadas antes de ejecutar `docker-compose`).
+
+Variables disponibles:
+
+- `SMTP_HOST`: Host del servidor SMTP (requerido para habilitar SMTP).
+- `SMTP_PORT`: Puerto del servidor (por defecto `587`).
+- `SMTP_USER`: Usuario de autenticación (opcional si el servidor no requiere).
+- `SMTP_PASS`: Contraseña del usuario.
+- `SMTP_SECURE`: `tls`, `ssl` o `none` (por defecto `tls`).
+- `SMTP_FROM`: Correo que aparecerá como remitente (por defecto `contacto@apex360.cl`).
+
+Ejemplo de archivo `.env`:
+
+```env
+SMTP_HOST=smtp.tuproveedor.com
+SMTP_PORT=587
+SMTP_USER=usuario@tudominio.cl
+SMTP_PASS=contraseña-segura
+SMTP_SECURE=tls
+SMTP_FROM=contacto@apex360.cl
+```
+
+---
+
 ### 🔧 Actualizar Contenido
 
 #### Método 1: Reconstruir (Cambios permanentes)
