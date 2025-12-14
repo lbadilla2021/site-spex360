@@ -95,7 +95,7 @@ function removeSection(id) {
     }
 }
 
-function saveCourse(e) {
+async function saveCourse(e) {
     e.preventDefault();
 
     const sections = Array.from(document.querySelectorAll('.section-item')).map(item => ({
@@ -112,22 +112,55 @@ function saveCourse(e) {
         sections
     };
 
+    let filename;
+    let courseId = editingId;
+
     if (editingId) {
         const index = courses.findIndex(c => c.id === editingId);
-        courses[index] = { ...courses[index], ...courseData };
+        filename = courses[index]?.filename || generateFilename(courseData.title);
+        courses[index] = { ...courses[index], ...courseData, filename };
     } else {
-        const newId = courses.length > 0 ? Math.max(...courses.map(c => c.id)) + 1 : 1;
-        const filename = generateFilename(courseData.title);
-        const htmlContent = generateCourseHTML({ ...courseData, id: newId });
+        courseId = courses.length > 0 ? Math.max(...courses.map(c => c.id)) + 1 : 1;
+        filename = generateFilename(courseData.title);
+        courses.push({ id: courseId, ...courseData, filename });
+    }
+
+    const coursePayload = { ...courseData, id: courseId, filename };
+
+    try {
+        await sendCourseToServer(coursePayload);
+        alert('✅ Curso generado en /cursos/');
+    } catch (error) {
+        const htmlContent = generateCourseHTML(coursePayload);
         downloadHTMLFile(htmlContent, filename);
-        courses.push({ id: newId, ...courseData, filename });
+        alert('📥 No se pudo generar en servidor. Descarga el HTML y súbelo a /cursos/');
     }
 
     localStorage.setItem('otecCourses', JSON.stringify(courses));
     renderTable();
     closeModal();
+}
 
-    alert(editingId ? 'Curso actualizado exitosamente' : 'Curso creado exitosamente');
+async function sendCourseToServer(course) {
+    const response = await fetch('generate-course.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ course })
+    });
+
+    if (!response.ok) {
+        throw new Error('Error HTTP al generar curso');
+    }
+
+    const data = await response.json();
+
+    if (!data.success) {
+        throw new Error(data.error || 'Error al generar curso');
+    }
+
+    return data;
 }
 
 function generateFilename(title) {
