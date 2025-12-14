@@ -19,8 +19,12 @@ $respond = function (bool $success, string $message, int $status = 200): void {
     exit;
 };
 
-$name = trim($_POST['name'] ?? '');
-$email = trim($_POST['email'] ?? '');
+$sanitize = static function (string $value): string {
+    return trim(preg_replace("/(\r|\n)/", '', $value));
+};
+
+$name = $sanitize($_POST['name'] ?? '');
+$email = $sanitize($_POST['email'] ?? '');
 $comments = trim($_POST['comments'] ?? '');
 
 if ($name === '' || $email === '' || $comments === '') {
@@ -38,7 +42,10 @@ $headers = "From: contacto@apex360.cl\r\n";
 $headers .= "Reply-To: {$email}\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-if (!mail($to, $subject, $body, $headers)) {
+$mailSent = mail($to, $subject, $body, $headers, '-fcontacto@apex360.cl');
+
+if (!$mailSent) {
+    error_log('Contacto Apex 360: fallo el envío de correo');
     $respond(false, 'No pudimos enviar tu mensaje en este momento. Inténtalo más tarde.', 500);
 }
 
