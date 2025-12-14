@@ -4,19 +4,11 @@ let editingId = null;
 let sectionCounter = 0;
 
 async function loadCourses() {
-    const stored = localStorage.getItem('otecCourses');
-    if (stored) {
-        courses = JSON.parse(stored);
-        renderTable();
-        return;
-    }
-
     try {
-        const response = await fetch(COURSES_DATA_URL);
+        const response = await fetch(COURSES_DATA_URL, { cache: 'no-cache' });
         if (!response.ok) throw new Error('No se pudo obtener cursos');
         const data = await response.json();
         courses = Array.isArray(data) ? data : [];
-        localStorage.setItem('otecCourses', JSON.stringify(courses));
     } catch (error) {
         console.error('Error cargando cursos desde JSON:', error);
         courses = [];
@@ -127,42 +119,40 @@ async function saveCourse(e) {
         sections
     };
 
-    let filename;
-    let courseId = editingId;
-
-    if (editingId) {
-        const index = courses.findIndex(c => c.id === editingId);
-        filename = courses[index]?.filename || generateFilename(courseData.title);
-        courses[index] = { ...courses[index], ...courseData, filename };
-    } else {
-        courseId = courses.length > 0 ? Math.max(...courses.map(c => c.id)) + 1 : 1;
-        filename = generateFilename(courseData.title);
-        courses.push({ id: courseId, ...courseData, filename });
-    }
+    const isEdit = Boolean(editingId);
+    const existingCourse = isEdit ? courses.find(c => c.id === editingId) : null;
+    const filename = isEdit
+        ? (existingCourse?.filename || generateFilename(courseData.title))
+        : generateFilename(courseData.title);
+    const courseId = isEdit
+        ? editingId
+        : courses.length > 0 ? Math.max(...courses.map(c => c.id)) + 1 : 1;
 
     const coursePayload = { ...courseData, id: courseId, filename };
+    const action = isEdit ? 'update' : 'create';
 
     try {
-        await sendCourseToServer(coursePayload);
-        alert('✅ Curso generado en /cursos/');
+        const response = await sendCourseToServer(action, coursePayload);
+        courses = Array.isArray(response?.courses) ? response.courses : courses;
+        alert('✅ Cambios guardados en cursos.json y carpeta /cursos/');
     } catch (error) {
+        console.error(error);
         const htmlContent = generateCourseHTML(coursePayload);
         downloadHTMLFile(htmlContent, filename);
         alert('📥 No se pudo generar en servidor. Descarga el HTML y súbelo a /cursos/');
     }
 
-    localStorage.setItem('otecCourses', JSON.stringify(courses));
     renderTable();
     closeModal();
 }
 
-async function sendCourseToServer(course) {
+async function sendCourseToServer(action, course) {
     const response = await fetch('generate-course.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ course })
+        body: JSON.stringify({ action, course })
     });
 
     if (!response.ok) {
@@ -666,10 +656,16 @@ function editCourse(id) {
 
 function deleteCourse(id) {
     if (confirm('¿Estás seguro de eliminar este curso?')) {
-        courses = courses.filter(c => c.id !== id);
-        localStorage.setItem('otecCourses', JSON.stringify(courses));
-        renderTable();
-        alert('Curso eliminado exitosamente');
+        sendCourseToServer('delete', { id })
+            .then(response => {
+                courses = Array.isArray(response?.courses) ? response.courses : courses.filter(c => c.id !== id);
+                renderTable();
+                alert('Curso eliminado exitosamente');
+            })
+            .catch(error => {
+                console.error(error);
+                alert('No se pudo eliminar el curso en el servidor');
+            });
     }
 }
 
