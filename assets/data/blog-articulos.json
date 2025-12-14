@@ -1,11 +1,41 @@
 [
-  {
-    "id": 1,
-    "title": "Automatizaciones en RRHH: Cómo la IA está Transformando la Gestión de Personas",
-    "summary": "Descubre cómo las automatizaciones y la inteligencia artificial están revolucionando los procesos de recursos humanos, desde reclutamiento hasta análisis predictivo de rotación.",
-    "category": "Transformación Digital",
-    "filename": "automatizaciones-rrhh.html",
-    "date": "2025-01-15",
-    "image": ""
-  }
+    {
+        "id": 1,
+        "title": "Automatizaciones en RRHH: Cómo la IA está Transformando la Gestión de Personas",
+        "summary": "Descubre cómo las automatizaciones y la inteligencia artificial están revolucionando los procesos de recursos humanos, desde reclutamiento hasta análisis predictivo de rotación.",
+        "category": "Transformación Digital",
+        "filename": "automatizaciones-rrhh.html",
+        "date": "2025-01-15",
+        "image": ""
+    },
+    {
+        "id": 2,
+        "title": "Art1",
+        "summary": "sdasadasd",
+        "category": "People Analytics",
+        "filename": "art1-html.html",
+        "date": "2025-12-14",
+        "image": "",
+        "content": "saddsadasdsad\nasda\nsd\nasd\nsa\nd\na\nsd\nas\ndsa"
+    },
+    {
+        "id": 3,
+        "title": "Art2",
+        "summary": "sddfdf",
+        "category": "People Analytics",
+        "filename": "art2.html",
+        "date": "2025-12-14",
+        "image": "",
+        "content": ""
+    },
+    {
+        "id": 4,
+        "title": "Art3",
+        "summary": "sadadadsasd",
+        "category": "Compensaciones",
+        "filename": "art3.html",
+        "date": "2025-12-14",
+        "image": "",
+        "content": "asdasdasdasd\nsadasdasdasd\nsdasdasdsada\n"
+    }
 ]

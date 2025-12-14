@@ -52,5 +52,15 @@
         "dates": "",
         "filename": "curso-aleman.html",
         "sections": []
+    },
+    {
+        "id": 7,
+        "title": "Curso Maquinas",
+        "duration": "11",
+        "intro": "saasdadads",
+        "image": "",
+        "dates": "",
+        "filename": "curso-maquinas.html",
+        "sections": []
     }
 ]

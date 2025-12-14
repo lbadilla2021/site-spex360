@@ -23,3 +23,6 @@ logs/
 # Archivos temporales
 *.tmp
 .cache/
+
+# Password
+.htpasswd
