@@ -10,7 +10,7 @@ JavaScript en el navegador **NO puede escribir archivos directamente** en el dis
 
 ### **Cómo Funciona:**
 
-1. **Crear curso** en `otec-admin.html`
+1. **Crear curso** en `admin/otec-admin.html`
 2. Click "Guardar Curso"
 3. JavaScript envía datos a `generate-course.php`
 4. **PHP genera el archivo** directamente en `/cursos/`
@@ -18,7 +18,7 @@ JavaScript en el navegador **NO puede escribir archivos directamente** en el dis
 
 ### **Archivos Necesarios:**
 
-- ✅ `otec-admin.html` (actualizado)
+- ✅ `admin/otec-admin.html` (actualizado)
 - ✅ `generate-course.php` (nuevo)
 
 ### **Instalación en VPS:**
@@ -27,7 +27,7 @@ JavaScript en el navegador **NO puede escribir archivos directamente** en el dis
 cd /root/docker/site-apex
 
 # 1. Subir archivos
-# - otec-admin.html (actualizado)
+# - admin/otec-admin.html (actualizado)
 # - generate-course.php (nuevo)
 
 # 2. Dar permisos de escritura a carpeta cursos
@@ -46,7 +46,7 @@ docker-compose up -d
 ### **Uso:**
 
 ```
-1. Abrir: http://tu-ip:9500/otec-admin.html
+1. Abrir: http://tu-ip:9500/admin/otec-admin.html
 2. Click "+ Nuevo Curso"
 3. Llenar datos
 4. Click "Guardar Curso"
@@ -70,7 +70,7 @@ Si PHP no está disponible, el sistema hace **fallback automático** a descarga:
 
 ### **Cómo Funciona:**
 
-1. **Crear curso** en `otec-admin.html`
+1. **Crear curso** en `admin/otec-admin.html`
 2. Click "Guardar Curso"
 3. JavaScript intenta llamar a PHP
 4. Si falla → **Descarga automática** del HTML
@@ -183,7 +183,7 @@ location ~ \.php$ {
 
 ## 📝 **Cómo Funciona Actualmente**
 
-El `otec-admin.html` actualizado hace esto:
+El `admin/otec-admin.html` actualizado hace esto:
 
 ```javascript
 async function saveCourse() {
@@ -229,7 +229,7 @@ async function saveCourse() {
 Si quieres usar la descarga manual (más simple):
 
 ```bash
-# 1. Ya tienes otec-admin.html actualizado
+# 1. Ya tienes admin/otec-admin.html actualizado
 # 2. Crear curso en el panel
 # 3. Descargar HTML
 # 4. Subir a /cursos/

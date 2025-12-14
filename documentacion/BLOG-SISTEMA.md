@@ -16,7 +16,7 @@
 - Botón flotante "Administrar Blog"
 - Carga dinámica desde LocalStorage
 
-### 2. **blog-admin.html** - Panel de Administración
+### 2. **admin/blog-admin.html** - Panel de Administración
 - **CRUD completo de artículos:**
   - Crear artículo
   - Editar artículo
@@ -75,7 +75,7 @@
 
 ### Para Administrador:
 1. blog.html → Click botón "Administrar Blog"
-2. blog-admin.html → Panel completo
+2. admin/blog-admin.html → Panel completo
 3. Click "+ Nuevo Artículo"
 4. Llenar formulario:
    - Título: "Ley Karin en Chile: Guía Completa 2025"
@@ -136,7 +136,7 @@
 /
 ├── apex360-landing.html (menú con link a blog)
 ├── blog.html (landing blog)
-├── blog-admin.html (panel admin)
+├── admin/blog-admin.html (panel admin)
 └── blog/
     ├── automatizaciones-rrhh.html (ejemplo)
     ├── otro-articulo.html (futuro)
@@ -154,7 +154,7 @@ cd /root/docker/site-apex
 
 # 1. Subir nuevos archivos:
 # - blog.html
-# - blog-admin.html
+# - admin/blog-admin.html
 # - Dockerfile (actualizado)
 # - blog/ (carpeta completa)
 
@@ -172,7 +172,7 @@ docker exec apex360-landing ls /usr/share/nginx/html/blog/
 
 ### URLs:
 - Blog: `http://65.108.150.100:9500/blog.html`
-- Admin: `http://65.108.150.100:9500/blog-admin.html`
+- Admin: `http://65.108.150.100:9500/admin/blog-admin.html`
 - Artículo: `http://65.108.150.100:9500/blog/automatizaciones-rrhh.html`
 
 ---
@@ -185,7 +185,7 @@ docker exec apex360-landing ls /usr/share/nginx/html/blog/
 2. Edita el contenido (título, texto, secciones)
 3. Guarda como nuevo archivo (ej: `ley-karin.html`)
 4. Sube a `/root/docker/site-apex/blog/`
-5. En blog-admin.html:
+5. En admin/blog-admin.html:
    - Agrega entrada con datos del artículo
    - Filename: `ley-karin.html`
 6. Rebuild Docker (si es necesario)
@@ -267,7 +267,7 @@ Ya tienes:
 
 Archivos entregados:
 - blog.html (17 KB)
-- blog-admin.html (16 KB)  
+- admin/blog-admin.html (16 KB)  
 - blog/automatizaciones-rrhh.html (28 KB)
 - Dockerfile (actualizado)
 - apex360-landing.html (actualizado con link a blog)

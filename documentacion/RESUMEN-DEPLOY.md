@@ -6,7 +6,7 @@
 1. **apex360-landing.html** - Landing principal consultoría RRHH
 2. **otec.html** - Landing OTEC con catálogo de cursos
 3. **curso-detalle.html** - Página individual de cada curso
-4. **otec-admin.html** - Panel administración CRUD cursos
+4. **admin/otec-admin.html** - Panel administración CRUD cursos
 
 ### 🐳 Docker (7 archivos)
 5. **Dockerfile** - Imagen nginx optimizada
@@ -63,7 +63,7 @@ Una vez desplegado:
 
 - **Landing:** `http://TU_IP:9500/apex360-landing.html`
 - **OTEC:** `http://TU_IP:9500/otec.html`  
-- **Admin:** `http://TU_IP:9500/otec-admin.html`
+- **Admin:** `http://TU_IP:9500/admin/otec-admin.html`
 
 ---
 
