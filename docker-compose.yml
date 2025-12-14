@@ -9,6 +9,12 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Santiago
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - SMTP_SECURE=${SMTP_SECURE:-tls}
+      - SMTP_FROM=${SMTP_FROM:-contacto@apex360.cl}
     volumes:
       # Carpeta cursos - PERSISTENTE (archivos generados por PHP)
       - ./cursos:/var/www/html/cursos
