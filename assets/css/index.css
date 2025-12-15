@@ -865,9 +865,9 @@ footer {
         gap: 2rem;
     }
 
-    .hero-visual {
+    /*.hero-visual {
         order: -1;
-    }
+    }*/
 
     .footer-grid {
         grid-template-columns: 1fr 1fr;
