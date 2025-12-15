@@ -1,20 +1,98 @@
 [
     {
         "id": 1,
-        "title": "Curso Google Sheets Avanzado",
+        "title": "Google Sheets Intermedio",
         "duration": "28 horas",
-        "intro": "Domina Google Sheets para la gestión de datos, colaboración y análisis empresarial. Aprende fórmulas avanzadas, tablas dinámicas y visualización de datos.",
-        "image": "",
-        "dates": "Próximo inicio: 15 Feb 2025",
+        "intro": "Curso online sincrónico cuyo objetivo es mejorar la productividad en el trabajo, fomentar el trabajo en equipo y apalanca decisiones basadas en datos mediante el uso Google Sheets\n\n• Conocer la interfaz y dar los primeros pasos\n• Manejar y procesar datos\n• Presentar informes y gráficos\n• Automatizar procesos mediante scripts simples\n• Trabajar colaborativamente",
+        "image": "https:\/\/eligemejor.sence.cl\/BuscarCursoNuevo\/DetalleCurso?curso=1238065660",
+        "dates": "Próximo inicio: 19 enero de 2026",
         "filename": "curso-google-sheets-avanzado.html",
         "sections": [
             {
-                "subtitle": "Fundamentos",
-                "content": "Introducción a Google Sheets y navegación de interfaz"
+                "subtitle": "Introducción del Curso de Google Sheet intermedio",
+                "content": "1.1 Opciones principales de la interfaz\n1.2 Celdas, Filas, Columnas y rangos\n1.3 Tipos de datos\n1.4 Copiando y pegando contenido\n1.5 Shortcuts más importantes"
             },
             {
-                "subtitle": "Fórmulas Avanzadas",
-                "content": "VLOOKUP, INDEX-MATCH, y funciones condicionales"
+                "subtitle": "Formato y Fórmulas",
+                "content": "2.1 Formatos de celdas\n2.2 Importación y exportación de datos\n2.3 Operaciones sobre filas y columnas\n2.4 Validación de datos\n2.5 Ordenar y filtrar datos\n2.6 Funciones lógicas, aritméticas, de texto, búsqueda y web\n\n\n"
+            },
+            {
+                "subtitle": "Construcción de Reportes",
+                "content": "3.1 Gráficos\n3.2 Integración con Presentaciones Slides\n3.3 Tablas dinámicas\n\n"
+            },
+            {
+                "subtitle": "Generación de Scripts",
+                "content": "4.1 Interactuar con celdas\n4.2 Creación de Menús desplegables\n4.3 Enviar correos desde un script\n4.4 Creación de funciones personalizadas\n\n\n"
+            },
+            {
+                "subtitle": "Trabajo Colaborativo",
+                "content": "5.1 Compartir documentos\n5.2 Importación de datos\n5.3 Notas, comentarios y chips de persona\n5.4 Historial de versiones\n5.5 Protección de hojas\n"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Power BI Básico Intermedio",
+        "duration": "12 horas",
+        "intro": "En este curso básico de Power BI online, aprenderás a utilizar la herramienta de Business Intelligence más demanda en el mercado laboral. Podrás integrar diversas fuentes de datos, transformarlos, construir KPI y desplegar reportes dinámicos e interactivos con información que le permita a tu organización realizar Inteligencia de Negocio y tomar decisiones basadas en datos.",
+        "image": "",
+        "dates": "Próximo inicio: 19 de enero de 2026",
+        "filename": "power-bi-basico-intermedio.html",
+        "sections": [
+            {
+                "subtitle": "Introducción",
+                "content": "1.1 Instalación\n1.2 Introducción y estructura\n1.3 Ejemplos de reportes terminados\n1.4 Los servicios de Power BI"
+            },
+            {
+                "subtitle": "Obtenciones y Modelado de Datos",
+                "content": "2.1 Orígenes de Datos\n2.2 Conectar bases de datos con DirectQuery\n2.3 Importación de datos de Microsoft\n2.4 Importación de datos de Google\n2.5 Construcción de Relaciones"
+            },
+            {
+                "subtitle": "Transformaciones con Power Query",
+                "content": "3.1 Funciones del Editor de Consultas\n3.2 Tipos de datos\n3.3 Limpieza y modelado de datos"
+            },
+            {
+                "subtitle": "Instrucciones DAX",
+                "content": "4.1 Columnas\n4.2 Métricas\n4.3 Funciones DAX\n4.4 Tablas de Tiempos"
+            },
+            {
+                "subtitle": "Visualizaciones",
+                "content": "5.1 Introducción a la visualización de datos\n5.2 Uso de gráficos\n5.3 Uso de tarjetas\n5.4 Uso de tablas\n5.5 Uso de matrices\n5.6 Uso de segmentación de datos"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Tecnicas De Trabajos En Altura",
+        "duration": "8 horas",
+        "intro": "El curso teórico práctico de Trabajo en Altura y Andamios entrega a los participantes los conocimientos y competencias necesarias para realizar labores en altura de forma segura y conforme a la normativa chilena vigente. A lo largo de la capacitación, se abordan los riesgos más comunes asociados a caídas, el uso correcto de equipos de protección personal, sistemas de detención y limitación de caídas, además de los procedimientos de armado, uso y desarme de andamios. También se revisan la legislación, normas técnicas aplicables y las buenas prácticas para la inspección y mantención de equipos.",
+        "image": "",
+        "dates": "Próximo Inicio: según requerido",
+        "filename": "tecnicas-trabajos-altura.html",
+        "sections": [
+            {
+                "subtitle": "Introducción",
+                "content": "- Contexto y relevancia del trabajo en altura en Chile\n- Estadísticas de accidentes y la importancia de la prevención\n- Objetivos del curso y competencias a desarrollar\n- Normativas y estándares nacionales e internacionales\n- Cultura de autocuidado y seguridad en las faenas"
+            },
+            {
+                "subtitle": "Contexto General",
+                "content": "- Contexto y relevancia del trabajo en altura en Chile\n- Estadísticas de accidentes y la importancia de la prevención\n- Objetivos del curso y competencias a desarrollar\n- Normativas y estándares nacionales e internacionales\n- Cultura de autocuidado y seguridad en las faenas"
+            },
+            {
+                "subtitle": "Medidas Preventivas y Legislación Aplicable",
+                "content": "- Identificación y evaluación de riesgos en faenas de altura\n- Procedimientos seguros de trabajo y planificación de tareas\n- Legislación chilena vigente: DS 594, Ley 16.744 y NCh 1258\n- Requisitos sobre elementos de protección personal (EPP)\n- Protocolos y registros obligatorios en terreno"
+            },
+            {
+                "subtitle": "SPDC, EPP y su Inspección",
+                "content": "- Sistemas de protección contra caídas (limitación vs detención)\n- Elementos esenciales: arnés, líneas de vida, puntos de anclaje\n- Correcto uso y ajuste de arneses y líneas retráctiles\n- Inspección, mantención y vida útil de los equipos\n- Normas de certificación y requisitos técnicos de los EPP"
+            },
+            {
+                "subtitle": "Rescate y Emergencias en Altura",
+                "content": "- Principios de un plan de rescate en altura\n- Tipos de rescate: asistido, auto-rescate y rescate con equipos\n- Equipos de rescate y procedimientos básicos\n- Factores de tiempo crítico: trauma por suspensión\n- Coordinación con brigadas y servicios externos"
+            },
+            {
+                "subtitle": " Armado y Uso Seguro de Andamios",
+                "content": "- Definición, tipos y clasificación de andamios según norma NCh 2501\n- Requisitos de seguridad en montaje y desmontaje\n- Procedimiento teórico de armado paso a paso\n- Ejercicio práctico: montaje supervisado de andamios\n- Inspección, recepción y criterios de seguridad en uso"
             }
         ]
     }
