@@ -300,28 +300,33 @@ nav {
 }
 
 .custom-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    background: linear-gradient(180deg, #f7f9fc 0%, #ffffff 100%);
+    border: 1px solid #e5eaf3;
+    border-radius: 18px;
     padding: 1.5rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(6px);
+    box-shadow: 0 25px 70px rgba(10, 17, 32, 0.25);
+    color: var(--text-dark);
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(90deg, #4bc7a0, #2c5e73);
+    border-radius: 14px;
+    box-shadow: 0 12px 20px rgba(43, 124, 112, 0.25);
 }
 
 .card-pill {
     padding: 0.4rem 0.9rem;
     border-radius: 999px;
-    background: rgba(232, 170, 66, 0.18);
-    color: var(--accent-light);
-    font-weight: 700;
-    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: #f2f7ff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
 }
 
 .card-steps {
@@ -333,13 +338,13 @@ nav {
     width: 12px;
     height: 12px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.4);
     transition: all 0.3s ease;
 }
 
 .card-steps .step.active {
-    background: var(--accent);
-    box-shadow: 0 0 0 6px rgba(232, 170, 66, 0.18);
+    background: #f7c35f;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
 }
 
 .card-modules {
@@ -350,65 +355,90 @@ nav {
 }
 
 .module {
-    background: rgba(0, 0, 0, 0.15);
+    background: #ffffff;
     padding: 1rem;
+    border-radius: 14px;
+    border: 1px solid #e6eaf4;
+    box-shadow: 0 12px 25px rgba(18, 36, 71, 0.08);
+}
+
+.module-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.65rem;
+}
+
+.module-icon {
+    width: 40px;
+    height: 40px;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 0.95rem;
 }
 
 .module-title {
-    color: white;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    font-weight: 800;
+    margin: 0;
 }
 
 .module-progress {
     position: relative;
     width: 100%;
     height: 8px;
-    background: rgba(255, 255, 255, 0.08);
+    background: #eef2fb;
     border-radius: 999px;
     overflow: hidden;
 }
 
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, var(--accent-light), var(--accent));
+    background: linear-gradient(90deg, #5ed2a8, #ffc265);
     border-radius: 999px;
 }
 
 .module-status {
     display: inline-block;
-    margin-top: 0.35rem;
-    padding: 0.3rem 0.75rem;
+    padding: 0.35rem 0.75rem;
     border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 0.82rem;
+    font-weight: 800;
+    white-space: nowrap;
 }
 
-.module-status.completed { background: rgba(45, 181, 111, 0.15); color: #7CF1B4; }
-.module-status.in-progress { background: rgba(232, 170, 66, 0.18); color: var(--accent-light); }
-.module-status.pending { background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.75); }
+.module-status.completed { background: rgba(30, 181, 122, 0.12); color: #1e7c57; }
+.module-status.in-progress { background: rgba(255, 194, 101, 0.18); color: #c17a1d; }
+.module-status.pending { background: rgba(93, 114, 158, 0.12); color: #4a5671; }
+
+.module-icon.completed { background: rgba(30, 181, 122, 0.15); color: #1e7c57; }
+.module-icon.in-progress { background: rgba(255, 194, 101, 0.22); color: #c17a1d; }
+.module-icon.pending { background: #eef2fb; color: #4a5671; }
 
 .card-footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    padding: 1rem;
+    padding: 1.1rem;
     border-radius: 12px;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #eef3fb;
+    border: 1px solid #dfe6f3;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .stat-label {
-    color: rgba(255, 255, 255, 0.6);
+    color: #6c748d;
     font-size: 0.85rem;
+    font-weight: 700;
 }
 
 .stat-value {
-    color: white;
+    color: #1b243a;
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 800;
 }
 
